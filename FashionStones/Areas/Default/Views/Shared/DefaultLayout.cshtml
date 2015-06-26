@@ -1,0 +1,108 @@
+﻿@using FashionStones.Models
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@ViewBag.Title</title>
+        <link href="~/Content/GlobalStyle.css" type="text/css" rel="stylesheet">
+        @Scripts.Render("~/bundles/jquery")
+        <link rel="shortcut icon" href=@Url.Content("~/Content/images/Logo.ico")>
+         @RenderSection("head", required: false)
+         <script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+        <script src="~/Scripts/SiteScripts/DefaultLayoutScript.js"></script>
+        <script src="~/Scripts/jquery.jgrowl.js"></script>
+        <link href="~/Content/jquery.jgrowl.css" rel="stylesheet" />
+        <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+    </head>
+<body>
+<div id="wrapper">
+<div id="jGrowl" class="top-right jGrowl">
+    <div class="jGrowl-notification"></div>
+</div>        
+    <div id="header">
+    <div id="header_a" class="center">
+        <div class="left margin10"><a href="@Url.Action("Index", "About")" class="block padding5">О комании</a>
+        </div>
+        <div class="left margin10">
+            <a href="@Url.Action("Index", "Home", new {area = "Admin"})" class="block padding5">Админка</a>
+        </div>
+    </div>
+    <div> @{Html.RenderAction("CartSummary", "ShoppingCart");} </div>
+    <div id="message_y" class="absolute">
+        <div id="message"></div>
+    </div>
+    <div id="contact">
+        <table>
+            <tr>
+                <td class="border">
+                    <a href="@Url.Action("Index", "Store")" class="block">
+                        <img src="/Content/images/FS.png"/>
+                    </a>
+                </td>
+                <td>
+                    <div>kapitoshka0777@gmail.com</div>
+                    <div>+38(098)363-60-02</div>
+                    <div>+38(095)543-75-83</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="head">
+    <table>
+        <tr>
+            <td>
+                <a href="@Url.Action("Index", "About")">Главная</a>
+            </td>
+            <td><a href="@Url.Action("Warranty", "About")">Гарантия и возврат</a></td>
+            <td><a href="@Url.Action("Delivery", "About")">Доставка</a></td>
+            <td><a href="@Url.Action("Index", "Account")">Оптовикам</a></td>
+            <td><a href="@Url.Action("Contacts", "About")">Контакты</a></td>
+            <td><a href="@Url.Action("InformPayment", "Store")">Сообщить об оплате</a></td>
+            <td>
+        @using (Html.BeginForm("Search", "Store", FormMethod.Get, new { @id = "sub-form-search" }))
+        {
+            <input id="search_input" type="search" name="text">
+            <button class="button_submit search">Поиск</button>
+        }   <span id="rData"></span>                          
+            </td>
+        </tr>
+    </table>
+</div>
+<table id="g">
+    <tr>
+        <td>
+            <div id="content_left">                               
+               @Html.Partial("_LoginPartial", new LoginViewModel())                  
+               @Html.Action("CatalogCategory", "Store")
+                <div id="FS">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="/Content/images/Fs_mini.png" class="shadow">
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div id="content">
+                <table id="goods" class="shadow">
+                    <tr>
+                        @RenderBody()
+                    </tr>
+                    <!--конец строки-->
+                </table>
+            </div>
+        </td>
+        <td>
+            <div id="content_right">
+             @Html.Action("CatalogStones", "Store")
+            </div>
+        </td>
+    </tr>
+</table>
+<div id="top-link" class="up">
+    <a href="#top" class="block"></a>
+    <div> @{Html.RenderAction("CartSummary", "ShoppingCart");} </div>
+</div>
+@RenderSection("scripts", required: false)
+</div>
+</body>
+</html>

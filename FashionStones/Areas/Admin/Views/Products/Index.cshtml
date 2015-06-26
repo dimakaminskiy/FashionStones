@@ -1,0 +1,131 @@
+﻿
+@using FashionStones.Utils
+@model  FashionStones.Utils.PageableData3<FashionStones.Models.Domain.Entities.Product >
+
+@{
+    ViewBag.Title = "Товар";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@{
+    int count = 0;
+    bool flag = true;
+}
+<h2>Товар</h2>
+<p>
+    @Html.ActionLink("Добавить", "Create","Products")
+</p>
+
+
+ @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+    {
+<p>
+    <span>Фильтры</span>
+    <b>По названию</b> @Html.TextBox("SearchByName", Model.CurrentFilter)
+    <b>По категории</b>
+    @Html.DropDownList("SearchByCategory", "All categories")
+    <input type="submit" value="Поиск" class="btn btn-default" />
+</p>
+    }
+<div>
+    <b>Сортировка по возрастанию или по убыванию</b>
+    <div>
+        <table style="width: auto;">
+            <tr>
+                <td>
+                    @Html.ActionLink("По названию", "Index", new
+            {
+                sortOrder = Model.NameSortParm,
+                currentFilter = Model.CurrentFilter,
+                searchByCategory = Model.CategoryParm
+            })
+                </td>
+                <td>
+                    @Html.ActionLink("По категории", "Index", new
+            {
+                sortOrder = Model.CategorySortParm,
+                currentFilter = Model.CurrentFilter,
+                searchByCategory = Model.CategoryParm
+            })
+                </td>
+                <td>
+                    @Html.ActionLink("По цене", "Index", new
+                    {
+                        sortOrder = Model.PriceSortParm,
+                        currentFilter = Model.CurrentFilter,
+                        searchByCategory = Model.CategoryParm
+                    })
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+</div>
+
+
+
+@if (Model.List.Any())
+{
+   
+
+
+
+
+    <table class="table table-hover" style="table-layout: fixed">
+        <tr><th colspan="4">Фото</th></tr>
+
+        @foreach (var item in Model.List)
+        {
+            if (count == 0)
+            {
+                @Html.Raw("<tr>")
+            }
+            count++;
+            <td>
+                <a href="@Url.Action("Edit", new {id = item.Id})" class="a_details">
+                    <div class="name_details">
+                        <div>Артикул @item.Id</div>
+                        <div>@Html.LabelFor(model => item.Name) @item.Name</div>
+                        <div>@Html.LabelFor(model => item.RetailPrice) @item.RetailPrice</div>
+                        <div>@Html.LabelFor(model => item.TradePrice) @item.TradePrice</div>
+
+                    </div>
+                    <img src="@item.JewelPHoto.PathToSmall"/>
+                </a>
+            </td>
+            flag = false;
+            if (count == 4)
+            {
+                @Html.Raw("</tr>")
+                count = 0;
+                flag = true;
+            }
+        }
+
+        @if (flag == false)
+        {
+            @Html.Raw("<td colspan='" + (4 - count) + "'" + " style='border-right: none; border-bottom: none;'></td></tr>")
+        }
+
+    </table>
+
+    if (Model.CountPage>1)
+    {
+        <div>
+
+            @Html.PageLinks(Model.PageNo, Model.CountPage,x => Url.Action("Index", new
+            {
+                page = x, itemPerPage = Model.ItemPerPage, searchByCategory =Model.CategoryParm, sortOrder=Model.CurrentSort,currentFilter=Model.CurrentFilter
+            }))
+        </div>
+    }
+
+}
+
+else
+{
+    <p>Нет товара.</p>
+}
+

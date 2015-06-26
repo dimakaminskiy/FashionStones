@@ -1,0 +1,20 @@
+﻿@model FashionStones.Models.ApplicationUser
+ <!------------------------------>
+<div id="profile">
+    <img src="/Content/images/021780.jpg">
+</div>
+<div id="profile_button">
+    <div>
+       @Model.FirstName @Model.LastName
+    </div>
+    <div>
+        <a href="@Url.Action("ChangePassword","Manage")">Сменить пароль</a>
+    </div>
+</div>
+ @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+ {
+    @Html.AntiForgeryToken()
+     <div>
+         <button type="submit" class="button_submit">Выйти</button>
+     </div>
+ }

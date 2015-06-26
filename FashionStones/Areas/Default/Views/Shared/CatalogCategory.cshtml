@@ -1,0 +1,66 @@
+﻿@model IEnumerable<FashionStones.Models.Domain.Entities.Category>
+    <div class="catalog">
+        <h3>Каталог</h3>
+        <div>
+            <a href="@Url.Action("Index", "Store", new { catId = 0,catName = "All" })">Все товары</a>
+        </div>
+
+
+        @foreach (var item in Model)
+        {
+            <div>
+                <a href="@Url.Action("Index", "Store", new { catId =item.Id ,catName = item.TranslitName() })">@item.Name</a>
+            </div>
+        }
+
+
+        @*@foreach (var item in Model)
+        {
+            <div>
+                <a href="@Url.Action("Index","Sergi")">@item.Name</a>
+            </div>
+        }*@
+
+        
+
+        @*<div class="show_block">
+                <a href="#">Подвески</a>
+            </div>
+            <div class="li_block">
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+            </div>
+            <div class="show_block">
+                <a href="#">Подвески</a>
+            </div>
+            <div class="li_block">
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+            </div>
+            <div class="show_block">
+                <a href="#">Подвески</a>
+            </div>
+            <div class="li_block">
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+            </div>
+            <div class="show_block">
+                <a href="#">Подвески</a>
+            </div>
+            <div class="li_block">
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+            </div>
+            <div class="show_block">
+                <a href="#">Подвески</a>
+            </div>
+            <div class="li_block">
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+                <a href="#">Браслеты</a>
+            </div>*@
+    </div>

@@ -1,0 +1,64 @@
+﻿@model FashionStones.Models.Domain.Entities.Product
+<script src="~/Scripts/jsZoom/zoomsl-3.0.min.js"></script>
+<script src="~/Scripts/SiteScripts/PopupProductDetails.js" type="text/javascript"></script>
+
+<div class="box-modal" id="exampleModal">
+    <div class="box-modal_close arcticmodal-close"></div>
+    <div id="detail" tr-id="@Model.Id">
+        <div>
+            <p class="upper">
+                @Model.Name
+            </p>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <img class="my-foto" src="@Model.JewelPHoto.PathToSmall" data-large="@Model.JewelPHoto.PathToBig">
+                </td>
+                <td>
+                    <div>Артикул<span>:</span> <span class="popup-art">@Model.Id</span></div>
+                    <div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.LabelFor(model => Model.TradePrice)<span>:</span>
+                            <span class="popup-price">@Model.TradePrice</span>
+                        }
+                        else
+                        {
+                            @Html.LabelFor(model => Model.RetailPrice)<span>:</span>
+                             <span class="popup-price">@Model.RetailPrice</span> 
+                        }
+                    </div>
+                    <div class="detailInfo">
+                        @Html.Partial("ItemInfoView", Model)
+                    </div>
+                    <div class="catalog_price">Есть в наличии</div>
+                </td>
+            </tr>
+        </table>
+        <div class="buy_button">
+            <table>
+                <tr>
+                    <td>
+                        <div id="popup-option">
+                            Количество:
+                            <input type="button" tr-id="@Model.Id" class="btn_count_down">
+                            <input type="number" tr-id="@Model.Id" class="inp_count" value="1">
+                            <input type="button" tr-id="@Model.Id" class="btn_count_up">
+                        </div>
+                    </td>
+                    <td id="popup_btn">
+                        <button class="button_submit btn_addToCart" tr-id="@Model.Id">Купить</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="arrow-left">
+        <a href="#"></a>
+    </div>
+    <div class="arrow-right">
+        <a href="#"></a>
+    </div>
+</div>

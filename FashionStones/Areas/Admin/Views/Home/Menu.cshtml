@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FashionStones.Models.Domain.Entities.Category>
+<ul id="one">
+    <li>
+        <h3>Управление</h3>
+        Пользователи
+        <ul>
+            <li>Заявки</li>
+            <li>@Html.ActionLink("Все", "Index", "Users", new { area = "Admin" }, null)</li>
+            <li>Заблокированые</li>
+        </ul>
+        Заказы
+        <ul>
+            <li>@Html.ActionLink("Новые", "BrowseNewOrders", "ManagerOrder", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("В обработке", "BrowseOrdersInProcessing", "ManagerOrder", new {area = "Admin"}, null)</li>
+            <li>@Html.ActionLink("Журнал", "BrowseExecutedOrders", "ManagerOrder", new {area = "Admin"}, null)</li>
+            <li><a href="@Url.Action("Index", "MethodOfDeliveries")">Методы доставки</a></li>
+            <li><a href="@Url.Action("Index", "MethodOfPayments")">Методы оплаты</a></li>
+        </ul>
+        Управление ценами
+        <ul>
+            <li><a href="@Url.Action("Index", "Markups")">Наценки</a></li>
+            <li><a href="@Url.Action("Index", "Discounts")">Скидки</a></li>
+        </ul>
+        Товар
+        <ul>
+            <li><a href="@Url.Action("Index", "Categories")">Категории</a></li>
+            <li><a href="@Url.Action("Index", "Products")">Товар</a></li>
+        </ul>
+
+
+        @*<script>
+            function my_f(objName) {
+                var object = document.getElementById(objName);
+                object.style.display == 'none' ? object.style.display = 'block' : object.style.display = 'none'
+            }
+        </script>
+
+        <a href="javascript:void(0)" onclick="my_f('textid')" style="text-decoration: underline;">
+            Товар по категориям
+        </a>
+        <ul id="textid" style="display:block;">
+            <li>@Html.ActionLink("Серьги", "Index", "Earrings", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Браслеты", "Index", "Bracelets", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Кулоны", "Index", "Pendants", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Подвески", "Index", "Charms", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Шнурки", "Index", "Laces", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Бусы", "Index", "Beads", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Резинки для волос", "Index", "Scrunchies", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Крабы", "Index", "Jewels", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Невидимки", "Index", "Invisibles", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Обручи", "Index", "Hoops", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Повязки на голову", "Index", "Headbands", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Наборы", "Index", "Kits", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Кольца", "Index", "Rings", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Шляпы", "Index", "Hats", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Перо", "Index", "Feathers", new { area = "Admin" }, null)</li>
+
+
+        </ul>*@
+
+            Другое
+            <ul>
+                <li>@Html.ActionLink("Камни", "Index", "Stones", new { area = "Admin" }, null)</li>
+                <li>@Html.ActionLink("Материалы", "Index", "Materials", new { area = "Admin" }, null)</li>
+                <li>@Html.ActionLink("Покрытия", "Index", "Cover", new { area = "Admin" }, null)</li>
+                <li>@Html.ActionLink("Фото", "Index", "PHoto", new {area = "Admin"}, null)</li>
+                <li><a href="@Url.Action("Index", "Coutries")">Страны</a></li>
+            </ul>
+</li>
+</ul>

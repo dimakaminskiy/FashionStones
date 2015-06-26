@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FashionStones.Models.Domain.Entities.Stone>
+    
+<div class="catalog">
+    <h3>Каталог камней</h3>
+    <div class="li_block">
+
+       @foreach (var item in Model)
+       {
+        <a href="@Url.RouteUrl("stone", new
+        {
+            stoneId = item.Id,
+            stone = item.TranslitName(),
+        })">@item.Name</a>
+
+       }
+
+
+      
+      
+
+
+
+    </div>
+</div>
+

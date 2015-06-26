@@ -1,0 +1,50 @@
+﻿@model FashionStones.ViewModel.HelpViewModel
+@{
+    ViewBag.Title = "Контакты";
+    Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
+}
+
+<td>
+<div class="dostavka">
+    <div id="AboutUs" class="center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div>
+                <h2>Написать нам</h2>
+                <p>Постарайтесь описать суть Вашего вопроса</p>
+                <p>
+                    @Html.TextAreaFor(model => model.Text, new { @class = "form-control", placeholder = "Ваше сообщение", cols = 60, rows = 5, @id = "TextArea1" })
+                </p>
+                <p class="btn-absolute">@Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })</p>
+                <p>Мы хотим знать, как к Вам обращаться</p>
+                <p>
+                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ф.И.О." } })
+                    </p>
+                <p class="btn-absolute">
+                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </p>
+                <p>На указанный E-mail придёт ответ на Ваш вопрос</p>
+                <p>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Ваш E-mail" } })
+                    </p>
+                <p class="btn-absolute">
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </p>
+                <input class="btn btn-default button_submit" id="Submit1" type="submit" value="Отправить" />
+            </div>
+        }
+    </div>
+    <div class="center">
+        <h2>Связаться с нами</h2>
+        <p>kapitoshka0777@gmail.com</p>
+        <p>+38(098)363-60-02</p>
+        <p>+38(095)543-75-83</p>
+        <h2>Реквизиты для оплаты</h2>
+        <p>№ карты</p>
+    </div>
+</div>
+    </td>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

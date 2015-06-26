@@ -1,0 +1,132 @@
+﻿@model  FashionStones.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
+}
+<td>
+    <div class="dostavka">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="show_block_register">
+            <div>
+                <p>
+                    <h2>Для регистрации как оптовый покупатель</h2> Вам необходимо пройти простую регистрацию, после которой с Вами свяжется менеджер по оптовым закупкам для активации Вашей учетной записи.
+                </p>
+                <p>
+                    Очень желательно иметь Свидетельство о Регистрации Предпринимателя, это даст Вам возможность пользоваться дополнительными скидками.
+                </p>
+                <p>
+                    Оптовые цены указаны с учётом процентов, в связи колебанием курса ДОЛЛАРА. Цена на товар может меняться,
+                    при уточнении цены на товар звоните по тел. 0983636002 или 0955437583.
+                </p>
+                @*<p>
+                        При регистрации Вам будет предложено заполнить необязательное поле для ввода ИНН (Идентификационного номера налогоплательщика).
+                    </p>
+
+                    <p>
+                        Но еще раз повторяем ИНН можно не заполнять. Либо это можно сделать позже.
+                    </p>*@
+                <ol>
+                    Есть несколько условий сотрудничества:
+
+                    <li>Не раздавать Ваш Логин и пароль третим лицам (система автоматически блокирует подобное).</li>
+                    <li>Минимальный ПЕРВЫЙ заказ 1000 грн. по оптовым ценам, последующие 300 грн.</li>
+                    <li>Учетная запись активируется на 15 дней до первого заказа, после которого все ограничения будут сняты.</li>
+                </ol>
+            </div>
+            <button type="button" value="Отмена" class="button_submit btn btn-default block_register">Согласен</button>
+        </div>
+        <div class="hide_block_register" style="display: none;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h2>Регистрация</h2>
+                <table class="center_table">
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.DropDownList("CountryId", null, htmlAttributes: new { @class = "form-control" })</td>
+                        <td>@Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td>@Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })</td>
+                    </tr>
+                </table>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Зарегистрироваться" class="button_submit btn btn-default" />
+                        <button type="button" value="Отмена" class="button_submit btn btn-default block_register">Отмена</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</td>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

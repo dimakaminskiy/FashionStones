@@ -1,0 +1,32 @@
+﻿@model FashionStones.Models.Domain.Entities.Product
+
+@if (!string.IsNullOrEmpty(Model.Size))
+{
+    <div>@Html.DisplayNameFor(model => model.Size): @Html.DisplayFor(model => model.Size)</div>
+}
+@if (!string.IsNullOrEmpty(Model.Lenght))
+{
+    <div>@Html.DisplayNameFor(model => model.Lenght): @Html.DisplayFor(model => model.Lenght)</div>
+}
+@if (!string.IsNullOrEmpty(Model.Weight))
+{
+    <div>@Html.DisplayNameFor(model => model.Weight): @Html.DisplayFor(model => model.Weight)</div>
+}
+@if (!string.IsNullOrEmpty(Model.Diameter))
+{
+    <div>@Html.DisplayNameFor(model => model.Diameter): @Html.DisplayFor(model => model.Diameter)</div>
+}
+
+@if (@Model.StoneId != null)
+{
+    <div>@Html.DisplayNameFor(model => model.StoneId): @Html.DisplayFor(model => model.Stone.Name)</div>
+}
+@if (@Model.CoverId != null)
+{
+    <div>@Html.DisplayNameFor(model => model.CoverId): @Html.DisplayFor(model => model.Cover.Name)</div>
+}
+@if (@Model.MaterialId != null)
+{
+    <div>@Html.DisplayNameFor(model => model.MaterialId): @Html.DisplayFor(model => model.Material.Name)</div>
+}
+

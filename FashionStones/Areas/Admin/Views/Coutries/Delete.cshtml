@@ -1,0 +1,32 @@
+﻿@model FashionStones.Models.Domain.Entities.Coutry
+
+@{
+    ViewBag.Title = "Удаление страны";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h3>Вы уверены что хотите удалить данную страну?</h3>
+<h4>Действие затронет списки заказов и профили пользователей</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <h4>@Html.DisplayNameFor(model => model.Name)</h4>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Список стран", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,47 @@
+﻿@model FashionStones.Models.Domain.Entities.Markup
+
+@{
+    ViewBag.Title = "Удаление категории наценки";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h3>Вы уверены что хотите удалить данную категорию?</h3>
+<h4>Действие затронет весь товар с этогой группой наценок.</h4>
+<div>
+ <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <h4>@Html.DisplayNameFor(model => model.Name)</h4>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            <h4>@Html.DisplayNameFor(model => model.RetailMarkup)</h4>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RetailMarkup)
+        </dd>
+
+        <dt>
+            <h4>@Html.DisplayNameFor(model => model.TradeMarkup)</h4>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TradeMarkup)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Список наценок", "Index")
+        </div>
+    }
+</div>

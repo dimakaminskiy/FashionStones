@@ -1,0 +1,149 @@
+﻿@model Web.ViewModels.EditOrderDetailViewModel
+
+@{
+    ViewBag.Title = "Редактирование списка покупок";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Заказ № @Model.OrderId</h2>
+<link href="../../Scripts/dialog.css" rel="stylesheet" />
+<script src="../../Scripts/jquery-1.7.1.js"></script>
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+<script src="../../Scripts/Ajax.js"></script>
+
+<script type="text/javascript">
+    
+    var recordToDelete;
+    var theHREF;
+    $('.deleteLink').click(function (e) {
+        recordToDelete = $(this).attr("rowId");
+        e.preventDefault();
+        theHREF = $(this).attr("href");
+
+
+        var message = $("#dialog-confirm p");
+        message.text("Вы уверены, что хотите удалить  позицию ?");
+      
+        $('#dialog-confirm').dialog('open');
+    });
+    $('#dialog-confirm').dialog({
+        autoOpen: false,
+        height: 280,
+        modal: true,
+        resizable: false,
+        buttons: {
+            'Продолжить': function () {
+                $.post(theHREF, null, function (json) {
+                    if (json.success) {
+                        $('#row-' + recordToDelete).fadeOut('slow');
+                    }
+                    else {
+                        var warrning = $("#div-dialog-warning  p").html();
+                        $("#div-dialog-warning  p").html(warrning + json.errorMessage);
+                        $("#div-dialog-warning").dialog({
+                            resizable: false,
+                            width: 500,
+                            height: 280,
+                            modal: true,
+                            buttons: {
+                                "Ок": function () {
+
+                                    $(this).dialog("close");
+                                }
+                            },
+                            close: function () {
+                                $("#div-dialog-warning  p").html(warrning);
+
+                            }
+                        }).parent().addClass("ui-state-error");
+                    }
+                },
+       'json');
+                $(this).dialog('close');
+            },
+            'Отмена': function () {
+                $(this).dialog('close');
+            }
+        }
+    });
+
+
+</script>
+
+
+
+<div class="content_in">
+
+    <h2>
+        @Html.ActionLink("Добавить  новый товар  в список покупок", "AddToListOrder", new {  id= Model.OrderId }) 
+    </h2>
+
+     <table>
+            <tr>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Категория
+                </th>
+       
+                <th>
+                    Упаковка (г)
+                </th>
+                <th>
+                    Количество
+                </th>
+                <th>
+                
+                    Цена (грн)
+                </th>
+                 <th>
+                
+                  Управление
+                </th>
+            </tr>
+
+            @foreach (var item in Model.list) {
+                <tr  id ="row-@item.Id">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+        
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Package)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)        
+                    </td>
+                    <td>
+                        @String.Format("{0:0.00}", ( item.Quantity*item.UnitPrice))
+                    </td>
+    
+                    <td>
+                        @Html.ActionLink("Редактировать", "EditItemFromOrderDetails",
+                         new { id=item.Id }, new { @class = "editLink" }) |
+                       @Html.ActionLink("Удалить", "DeleteFromListOrder",
+                           new { id=item.Id }, new { @class = "deleteLink" ,rowId=item.Id}) 
+
+                    </td>
+      
+                </tr>
+            }
+        </table>
+
+</div>
+
+<p>
+    @Html.ActionLink("К заказу", "EditOrder", new {  id=Model.OrderId }) 
+
+</p>
+
+<div id="dialog-confirm" title="Подтверждение" style="display:none;">
+    <p>Вы действительно хотите удалить данную позицию? </p>
+</div>
+
+<div style="display:none" id="div-dialog-warning"  title="Ошибка">
+    <p><span class="ui-icon ui-icon-alert alert-image"></span></p>
+</div>

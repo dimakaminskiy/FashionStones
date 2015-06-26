@@ -1,0 +1,60 @@
+﻿@model Web.ViewModels.ProduceCatalog
+
+@{
+    ViewBag.Title = "Добавление товара в заказ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Добавление нового товара в заказ</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="../../Scripts/DropDownListEventForAddToListOrder.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Товар</legend>
+        @Html.HiddenFor(model => model.OrderId)
+        @Html.HiddenFor(model => model.OrderDetailId)
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedCategoryId)
+        </div>
+    
+        <div class="editor-field">
+               
+            @Html.DropDownListFor(model => model.SelectedCategoryId,
+                Model.GetListCategory(),String.Empty)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedProduceId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.SelectedProduceId, Model.GetListProduce(), String.Empty)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedPrepackageId)
+        </div>
+        <div class="editor-field">         
+            @Html.DropDownListFor(model => model.SelectedPrepackageId, Model.GetListPrepackage(), String.Empty)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Count)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Count)
+            @Html.ValidationMessageFor(model => model.Count)
+        </div>
+
+        <p>
+            <input type="submit" value="Сохранить" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("К просмотру заказа", "EditListOrder", new {  id=Model.OrderId }) 
+</div>

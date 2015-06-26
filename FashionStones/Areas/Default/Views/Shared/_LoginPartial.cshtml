@@ -1,0 +1,61 @@
+﻿@model  FashionStones.Models.LoginViewModel
+
+
+@if (Request.IsAuthenticated == false)
+{
+
+    using (Html.BeginForm("Login", "Account", new {ReturnUrl = Request.QueryString["ReturnUrl"]}, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.LabelFor(t => t.Email)
+        </div>
+        @Html.EditorFor(model => model.Email, new
+        {
+            htmlAttributes = new {@class = "form-control", placeholder = "Логин или E-mail"}
+        })
+        <div>
+            @Html.LabelFor(t => t.Password)
+        </div>
+        @Html.EditorFor(model => model.Password,
+            new {htmlAttributes = new {@class = "form-control", placeholder = "Пароль"}})
+        <div>
+            @Html.LabelFor(model => model.RememberMe, htmlAttributes: new {@class = "control-label"})
+            @Html.CheckBoxFor(m => m.RememberMe, new {@checked = "checked"})
+        </div>
+        <div>
+            <button class="button_submit">Войти</button>
+        </div>
+        <div>
+            <button class="button_submit" type="button" onclick='location.href = "@Url.Action("Index", "Account")"'>Регистрация</button>
+        </div>
+        <div>
+            @Html.ActionLink("Забыли пароль?", "ForgotPassword", "Account", null, new {@class = "forgot"})
+        </div>
+
+
+    }
+}
+else
+{
+   {Html.RenderAction("UserProfile", "Account");}
+}
+
+
+
+@*<div>Телефон или e-mail</div>
+<input type="text">
+<div>Пароль</div>
+<input type="password">
+<div>
+    Запомнить меня <input type="checkbox" checked>
+</div>
+<div>
+    <button class="button_submit">Войти</button>
+</div>
+<div>
+    <button class="button_submit" onclick='location.href = "@Url.Action("Index", "Account")"'>Регистрация</button>
+</div>
+<div>
+    <a href="#">Забыли пароль?</a>
+</div>*@

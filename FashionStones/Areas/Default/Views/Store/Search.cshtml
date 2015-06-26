@@ -1,0 +1,169 @@
+﻿@using FashionStones.Utils
+@model ProductViewModel
+@{
+    ViewBag.Title = "Поиск";
+    Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
+    int count = 0;
+}
+
+<script src="~/Scripts/SiteScripts/ShoppingCartGlobal.js"></script>
+<link href="~/Scripts/jquery.arcticmodal/jquery.arcticmodal-0.3.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.arcticmodal/jquery.arcticmodal-0.3.min.js"></script>
+<link href="~/Scripts/jquery.arcticmodal/themes/dark.css" rel="stylesheet" />
+<script type="text/javascript">
+    //Инфо при наведении
+    function showd(pid) {
+        document.getElementById('prop-' + pid).style.display = 'block';
+    };
+
+    function hided(pid) {
+        document.getElementById('prop-' + pid).style.display = 'none';
+    }
+</script>
+<script type="text/javascript">
+    //Модальное окно
+    //var oldBodyOuterWidth = body.outerWidth(true);
+    //var oldScrollTop = html.scrollTop();
+    //html.css('overflow-y', 'hidden');
+    //newBodyOuterWidth = body.outerWidth(true);
+    //body.css('margin-right', (newBodyOuterWidth - oldBodyOuterWidth) + 'px');
+    //html.scrollTop(oldScrollTop); // necessary for Firefox
+    $(document).ready(function () {
+        $('.clickImgGallery').click(function (event) {;
+            event.preventDefault();
+            var link = $(this).attr('href');
+            $(function () {
+                $('#exampleModalImg').empty();
+                $('#exampleModalImg').prepend('<div class="box-modal_close arcticmodal-close"></div><img src="'+link+'" />');
+                $('#exampleModalImg').arcticmodal();
+            });
+        });
+
+        $('.clickDetail').click(function (e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            $.arcticmodal({
+                type: 'ajax',
+                url: link,
+                afterClose: function(data, el) {
+                    //var list = $('.magnifier', '.cursorshade', '.statustiv', '.tracker');
+                    var b = $('.magnifier, .cursorshade, .statusdiv, .tracker');
+                    console.log(b);
+                    b.remove();
+                }
+            });
+        });
+    });
+</script>
+
+<td colspan="3">
+    <script>
+        function CallChangefunc(val) {
+            $("#limit").val(val);
+            $("#sub-form-limit").submit();
+        }
+    </script>
+@if (Model.List.Any())
+{
+    using (Html.BeginForm("Search", "Store", FormMethod.Post, new {@id = "sub-form-limit"}))
+     {
+         <input id="page" type="hidden" name="page" value="@Model.PageNo">
+         <input id="limit" type="hidden" name="limit" value="@Model.ItemPerPage">
+         <input id="sort" type="hidden" name="sort" value="@Model.Sort">
+         <input id="search" type="hidden" name="search" value="@Model.SearchString">
+     }
+    <div id="filters">
+        <div class="right_float">
+            @Html.DropDownListFor(m => m.ItemPerPage, Model.LimitOptions, new {@onchange = "CallChangefunc(this.value)"})
+        </div>
+        @Html.SortOptionsLink(string.IsNullOrEmpty(Model.Sort) ? Model.DefSortOption : Model.Sort, Model.SortOptions,
+            x => Url.Action("Search", "Store", new {page = 1, limit = Model.ItemPerPage, sort = x}))
+    </div>
+}
+</td>
+
+@if (Model.List.Any())
+{
+
+
+    foreach (var item in Model.List)
+    {
+        if (@count == 0)
+        {
+            @Html.Raw("<tr><td td-class='" + @item.Id + "'>")
+        }
+        else
+        {
+            @Html.Raw("<td td-class='" + @item.Id + "'>")
+        }
+        <div tr-id="fName-@item.Id">
+            <a href="@Url.Action("Details", "Products", new {id = item.Id})"
+               class="name_goods block clickDetail">@item.FullName</a>
+        </div>
+        <div class="relative" style="width: 200px; margin: auto;">
+            <div id="prop-@item.Id" class="absolute none info" onmouseover="showd(@item.Id)" onmouseout="hided(@item.Id)">
+                @Html.Partial("ItemInfoView", item)
+            </div>
+            <a href="@item.JewelPHoto.PathToBig" class="goods_img relative clickImgGallery"
+               tr-id="@item.Id" onmouseover="showd(@item.Id)" onmouseout="hided(@item.Id)">
+                <img class="preview" tr-id="preview-@item.Id" src="@item.JewelPHoto.PathToSmall"/>
+            </a>
+        </div>
+        <div class="catalog_price">Есть в наличии</div>
+        if (User.Identity.IsAuthenticated)
+        {
+            <div>@Html.LabelFor(model => item.TradePrice):<span tr-id="price-@item.Id" class="price"> @item.TradePrice</span></div>
+        }
+        else
+        {
+            <div>@Html.LabelFor(model => item.RetailPrice):<span tr-id="price-@item.Id" class="price"> @item.RetailPrice</span></div>
+        }
+        <div class="option" tr-id="option-@item.Id">
+            Количество:
+            <input type="button" tr-id="@item.Id" class="btn_count_down">
+            <input type="number" tr-id="@item.Id" class="inp_count" value="1">
+            <input type="button" tr-id="@item.Id" class="btn_count_up">
+        </div>
+        <div class="buy_button">
+            <button class="button_submit btn_addToCart" tr-id="@item.Id">Купить</button>
+        </div>
+        @Html.Raw("</td>")
+        count++;
+        if (count == 3)
+        {
+            count = 0;
+            @Html.Raw("</tr>")
+        }
+    }
+    if (count != 0)
+    {
+        @Html.Raw("<td colspan=" + (3 - count) + "></tr>")
+    }
+    <tr>
+        <td colspan="3">
+            <div style="clear: both;">
+
+                @if (Model.CountPage > 1)
+                {
+
+                    @Html.PageLinks(Model.PageNo, Model.CountPage, x => Url.Action("Search",
+                        new
+                        {
+                            page = x,
+                            limit = Model.ItemPerPage,
+                            sort = Model.Sort,
+                            text = Model.SearchString,
+
+                        }))
+                }
+            </div>
+        </td>
+    </tr>
+}
+else
+{
+    <div>
+        Ваш запрос не дал результатов. Попробуйте изменить его.
+    </div>
+}
+

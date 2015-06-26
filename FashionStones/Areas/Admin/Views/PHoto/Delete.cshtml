@@ -1,0 +1,27 @@
+﻿@model FashionStones.Models.Domain.Entities.JewelPHoto
+
+@{
+    ViewBag.Title = "Удаление";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h3>Вы уверены что хотите удалить данное фото?</h3>
+<h4>Это действие затронет весь товар.</h4>
+
+<div>
+    <h4>JewelPHoto</h4>
+    <hr />
+    <div>
+        @Html.DisplayNameFor(model => model.Caption)
+        @Html.DisplayFor(model => model.Caption)
+        <img src="@Model.PathToSmall" alt="@Model.Caption"/>
+    </div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Список фото", "Index")
+        </div>
+    }
+</div>

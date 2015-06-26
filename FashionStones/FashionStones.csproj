@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0C2977EC-0506-4974-84E2-CFA87CCD97AE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FashionStones</RootNamespace>
+    <AssemblyName>FashionStones</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=__MvcPagesVersion__, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_LocalResources\GlobalResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CoutriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CoverController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DiscountsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerOrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MarkupsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MaterialsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MethodOfDeliveriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MethodOfPaymentsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PHotoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StonesController.cs" />
+    <Compile Include="Areas\Default\Controllers\AboutController.cs" />
+    <Compile Include="Areas\Default\Controllers\CheckoutController.cs" />
+    <Compile Include="Areas\Default\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Default\Controllers\ShoppingCartController.cs" />
+    <Compile Include="Areas\Default\Controllers\StoneController.cs" />
+    <Compile Include="Areas\Default\Controllers\StoreController.cs" />
+    <Compile Include="Areas\Default\DefaultAreaRegistration.cs" />
+    <Compile Include="Areas\Default\Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Areas\Default\Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506251355282_first.cs" />
+    <Compile Include="Migrations\201506251355282_first.Designer.cs">
+      <DependentUpon>201506251355282_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DataManager.cs" />
+    <Compile Include="Models\Domain\Entities\DataBase.cs" />
+    <Compile Include="Models\Domain\Entities\Orders.cs" />
+    <Compile Include="Models\Domain\Implementations\GenericRepository.cs" />
+    <Compile Include="Models\Domain\Interfaces\IGenericRepository.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utils\IdentityExtensions.cs" />
+    <Compile Include="Utils\EmailSettings.cs" />
+    <Compile Include="Utils\Paginator.cs" />
+    <Compile Include="Utils\PhotoEditor.cs" />
+    <Compile Include="Utils\ProductViewModel.cs" />
+    <Compile Include="Utils\SelectItemPerPageList.cs" />
+    <Compile Include="Utils\SelectListHelper.cs" />
+    <Compile Include="Utils\SortItems.cs" />
+    <Compile Include="ViewModel\HelpViewModel.cs" />
+    <Compile Include="ViewModel\InformPaymentViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCart.cs" />
+    <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Default\Views\web.config" />
+    <Content Include="Content\dialog.css" />
+    <Content Include="Content\fineuploader.css" />
+    <Content Include="Content\GlobalStyle.css" />
+    <Content Include="Content\images\021780.jpg" />
+    <Content Include="Content\images\404.png" />
+    <Content Include="Content\images\533522_cvety_tyulpany_listiki_6780x3838_www.Gde-Fon.com.jpg" />
+    <Content Include="Content\images\admin.jpg" />
+    <Content Include="Content\images\arrow-left.png" />
+    <Content Include="Content\images\arrow-right.png" />
+    <Content Include="Content\images\bg\bg_dark.png" />
+    <Content Include="Content\images\bg\bg_light.png" />
+    <Content Include="Content\images\bg\bg_message.png" />
+    <Content Include="Content\images\bg\tulpan.png" />
+    <Content Include="Content\images\bg_button.png" />
+    <Content Include="Content\images\bg_white %281%29.png" />
+    <Content Include="Content\images\bg_white %282%29.png" />
+    <Content Include="Content\images\black.gif" />
+    <Content Include="Content\images\button.png" />
+    <Content Include="Content\images\check.png" />
+    <Content Include="Content\images\city.png" />
+    <Content Include="Content\images\city_text.png" />
+    <Content Include="Content\images\close-icons.png" />
+    <Content Include="Content\images\cloud.png" />
+    <Content Include="Content\images\diamond_PNG6696.png" />
+    <Content Include="Content\images\down_small.gif" />
+    <Content Include="Content\images\Drag_18.jpg" />
+    <Content Include="Content\images\flovin365.png" />
+    <Content Include="Content\images\FS.png" />
+    <Content Include="Content\images\Fs_mini.png" />
+    <Content Include="Content\images\hd-black-wallpaper.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\00b2d12a-9440-443f-8f4c-cc41d95551b0.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\013591b8-1a96-48fc-ad34-494eac677da5.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\06e34ed3-357e-4f45-b9db-5f1c9e4a7bb2.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\0af9963d-ca6f-41fa-880a-4238cf70b894.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\0f4a8c1a-c625-4290-a65c-39e7fa685791.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\12a8ae83-594d-4e86-8683-43a0bfc6730e.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\1e34f14d-bf90-4316-88c3-48e1e5208de9.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\2167d1ef-b1ab-4ce9-9db9-323153cf37f1.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\262b667b-4169-43d4-98c1-d9f99213c546.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\280f38c7-e056-4f51-8522-e5164ff8e49e.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\2cb12ac5-f639-4106-948e-a894cc30380d.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\2cbb4dc2-49b5-41c7-9df1-ed81afb8a07f.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\2daf8e2a-8532-46df-a69a-5b7b95636ca2.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\327b5b65-b972-4260-a4b2-76f5c13d0af1.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\33e73665-37ab-4989-89a4-b9eef0463719.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\3c3b2b5e-153a-48a6-975e-1e26b93b8a1e.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\50b2aef9-ab28-40af-a039-4e0c7d6bb156.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\53ed4fd1-2185-4dc9-b2a7-160c4bb0a41e.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\5faf7ee4-781e-490b-874c-1b840a3aad07.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\6504e938-f931-4c27-bfb0-4b23b6b86933.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\6a92ca23-8e32-4857-b1a9-e51534bbb606.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\6dff203b-7b42-4190-9f8d-71d4ec817aeb.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\753f0ccc-42cf-463a-8938-171a8483e8c1.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\754e5251-00e2-4698-88d8-6a9954dfbad9.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\762ffe69-0e26-4e5e-bd87-e0644391b5fb.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\7758a3df-020f-435f-bd7c-69e9a9e8ef60.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\7b76bc67-4ee3-4b2d-94d4-8f89a7504480.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\7ce7fac0-b444-498c-9158-c5d2bcc1c81a.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\8359f3e4-ae62-4eda-89cc-27e57684f241.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\853da2a6-11c3-4865-a005-2e8b779b7212.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\857f0f12-64a6-4150-afb1-47ff5f88ada8.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\874da3a5-ed96-4264-b3a6-e5443313d159.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\87744b2e-219d-4806-a69a-ebc1dbf1db9c.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\8d03a3aa-5262-4e5d-a44f-9028e4556953.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\8f285e8d-1e30-4f3c-b352-e95f86dba91d.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\97d3c266-5ed1-4679-b245-c737f81c55f0.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\996d1429-3d73-4b71-8f26-498195065168.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\9adeab35-68ad-4b86-97ea-9e4cb39861e2.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\9bd6cf74-ff90-4719-b2dd-39760f9d4c0c.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\9c83a549-6cba-4310-8282-0ef01b221149.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\9f07a707-5c7d-42d6-bfd0-32049753eb52.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\af00b812-07a8-4950-95fa-0a28098648bf.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\b0b3e780-6bf0-4c88-b6ef-852c8c6c5a4d.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\b1d5499b-4852-4181-8239-4d8e555a353f.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\bbe6f4f5-3e51-430a-8c56-6aa86520b387.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\bec40c55-a51d-45d0-ab54-8a2d846de294.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\c0380807-2f7f-4a08-b81e-ae4072e63121.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\c1870361-33e5-42eb-ad89-690616f69cf1.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\c2bc0c93-97c5-4a04-ba95-f0322cb5e11c.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\c64d3630-5072-4573-99d5-890dd3f9ad93.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\cdfce5d3-28a8-43b9-8a18-9c5f18d40058.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\d0884d07-0ced-4efb-8b53-da10fba10656.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\db72118f-68d4-4856-b91a-3c7af732c6dc.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\db966ed2-d923-4b4c-a468-0dd4f649ed0c.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\e0becb12-a779-490d-995c-c534c669a1bf.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\e0e7b6ba-1e14-4025-80ca-553597655c0c.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\e7b9ec3a-fb24-4bf3-ab12-1da964b417fd.jpg" />
+    <Content Include="Content\images\jewelPHoto\big\e7d4fb48-c3fb-4248-99b7-bff4be21688c.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\e88f196a-dbfb-4541-9266-07f3f89f1770.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\ead8fee4-41dd-4fc3-b61c-bacf409d62b0.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\ebcae2ae-0afe-446e-bcaa-1a34173654fc.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\ecc28426-4b11-45ec-b0b9-e2526c3cb4c2.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\f19b3c0b-5f77-456a-8ee9-a4f7d6cf474d.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\f1e60dd2-9ad7-4325-ba74-587bd05336a0.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\f358fd71-2b7c-4104-a5ac-f3adc9868fca.JPG" />
+    <Content Include="Content\images\jewelPHoto\big\fd987962-e4e2-4649-b982-35621880bda0.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\00b2d12a-9440-443f-8f4c-cc41d95551b0.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\013591b8-1a96-48fc-ad34-494eac677da5.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\06e34ed3-357e-4f45-b9db-5f1c9e4a7bb2.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\0af9963d-ca6f-41fa-880a-4238cf70b894.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\0f4a8c1a-c625-4290-a65c-39e7fa685791.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\12a8ae83-594d-4e86-8683-43a0bfc6730e.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\1e34f14d-bf90-4316-88c3-48e1e5208de9.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\2167d1ef-b1ab-4ce9-9db9-323153cf37f1.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\262b667b-4169-43d4-98c1-d9f99213c546.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\280f38c7-e056-4f51-8522-e5164ff8e49e.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\2cb12ac5-f639-4106-948e-a894cc30380d.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\2cbb4dc2-49b5-41c7-9df1-ed81afb8a07f.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\2daf8e2a-8532-46df-a69a-5b7b95636ca2.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\327b5b65-b972-4260-a4b2-76f5c13d0af1.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\33e73665-37ab-4989-89a4-b9eef0463719.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\3c3b2b5e-153a-48a6-975e-1e26b93b8a1e.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\50b2aef9-ab28-40af-a039-4e0c7d6bb156.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\53ed4fd1-2185-4dc9-b2a7-160c4bb0a41e.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\5faf7ee4-781e-490b-874c-1b840a3aad07.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\6504e938-f931-4c27-bfb0-4b23b6b86933.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\6a90fdbd-c870-4ee5-9ee2-eaef99612ab7.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\6a92ca23-8e32-4857-b1a9-e51534bbb606.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\6dff203b-7b42-4190-9f8d-71d4ec817aeb.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\753f0ccc-42cf-463a-8938-171a8483e8c1.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\754e5251-00e2-4698-88d8-6a9954dfbad9.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\762ffe69-0e26-4e5e-bd87-e0644391b5fb.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\7758a3df-020f-435f-bd7c-69e9a9e8ef60.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\7b76bc67-4ee3-4b2d-94d4-8f89a7504480.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\7ce7fac0-b444-498c-9158-c5d2bcc1c81a.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\8359f3e4-ae62-4eda-89cc-27e57684f241.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\853da2a6-11c3-4865-a005-2e8b779b7212.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\857f0f12-64a6-4150-afb1-47ff5f88ada8.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\874da3a5-ed96-4264-b3a6-e5443313d159.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\87744b2e-219d-4806-a69a-ebc1dbf1db9c.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\8d03a3aa-5262-4e5d-a44f-9028e4556953.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\8f285e8d-1e30-4f3c-b352-e95f86dba91d.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\97d3c266-5ed1-4679-b245-c737f81c55f0.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\996d1429-3d73-4b71-8f26-498195065168.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\9adeab35-68ad-4b86-97ea-9e4cb39861e2.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\9bd6cf74-ff90-4719-b2dd-39760f9d4c0c.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\9c83a549-6cba-4310-8282-0ef01b221149.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\af00b812-07a8-4950-95fa-0a28098648bf.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\b0b3e780-6bf0-4c88-b6ef-852c8c6c5a4d.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\b1d5499b-4852-4181-8239-4d8e555a353f.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\bbe6f4f5-3e51-430a-8c56-6aa86520b387.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\bec40c55-a51d-45d0-ab54-8a2d846de294.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\c0380807-2f7f-4a08-b81e-ae4072e63121.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\c1870361-33e5-42eb-ad89-690616f69cf1.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\c2bc0c93-97c5-4a04-ba95-f0322cb5e11c.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\c64d3630-5072-4573-99d5-890dd3f9ad93.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\cdfce5d3-28a8-43b9-8a18-9c5f18d40058.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\d0884d07-0ced-4efb-8b53-da10fba10656.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\db72118f-68d4-4856-b91a-3c7af732c6dc.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\db966ed2-d923-4b4c-a468-0dd4f649ed0c.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\e0becb12-a779-490d-995c-c534c669a1bf.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\e0e7b6ba-1e14-4025-80ca-553597655c0c.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\e7b9ec3a-fb24-4bf3-ab12-1da964b417fd.jpg" />
+    <Content Include="Content\images\jewelPHoto\small\e7d4fb48-c3fb-4248-99b7-bff4be21688c.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\e88f196a-dbfb-4541-9266-07f3f89f1770.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\ead8fee4-41dd-4fc3-b61c-bacf409d62b0.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\ebcae2ae-0afe-446e-bcaa-1a34173654fc.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\ecc28426-4b11-45ec-b0b9-e2526c3cb4c2.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\f19b3c0b-5f77-456a-8ee9-a4f7d6cf474d.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\f1e60dd2-9ad7-4325-ba74-587bd05336a0.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\f358fd71-2b7c-4104-a5ac-f3adc9868fca.JPG" />
+    <Content Include="Content\images\jewelPHoto\small\fd987962-e4e2-4649-b982-35621880bda0.JPG" />
+    <Content Include="Content\images\kolts161.png" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\Logo.ico" />
+    <Content Include="Content\images\Logo.png" />
+    <Content Include="Content\images\Logo_basket.png" />
+    <Content Include="Content\images\logo_love.gif" />
+    <Content Include="Content\images\NoImage.gif" />
+    <Content Include="Content\images\sorry.png" />
+    <Content Include="Content\images\sortable.png" />
+    <Content Include="Content\images\sprite.png" />
+    <Content Include="Content\images\up.png" />
+    <Content Include="Content\images\up_small.gif" />
+    <Content Include="Content\Jcrop\jquery.Jcrop.css" />
+    <Content Include="Content\Jcrop\jquery.Jcrop.custum.css" />
+    <Content Include="Content\Jcrop\jquery.Jcrop.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery.jgrowl.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\StyleAdmin.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\images\check.psd" />
+    <Content Include="Content\images\check2.psd" />
+    <Content Include="Content\images\cloud.psd" />
+    <Content Include="Content\images\FS.psd" />
+    <Content Include="Content\images\Fs_mini.psd" />
+    <Content Include="Content\images\Thumbs.db" />
+    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Coutries\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Coutries\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Coutries\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Coutries\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Cover\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Cover\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Cover\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Cover\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Discounts\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Discounts\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Discounts\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Discounts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Menu.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerOrder\AddToListOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerOrder\BrowseExecutedOrders.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerOrder\BrowseNewOrders.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerOrder\BrowseOrdersInProcessing.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerOrder\EditItemFromOrderDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerOrder\EditListOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerOrder\EditOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Markups\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Markups\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Markups\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Markups\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Markups\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Materials\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Materials\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Materials\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Materials\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfDeliveries\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfDeliveries\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfDeliveries\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfDeliveries\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfPayments\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfPayments\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfPayments\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MethodOfPayments\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PHoto\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PHoto\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\PHoto\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\PHoto\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PHoto\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Stones\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Stones\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Stones\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Stones\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Default\Views\About\Contacts.cshtml" />
+    <Content Include="Areas\Default\Views\About\Delivery.cshtml" />
+    <Content Include="Areas\Default\Views\About\Discounts.cshtml" />
+    <Content Include="Areas\Default\Views\About\HelpConfirm.cshtml" />
+    <Content Include="Areas\Default\Views\About\Index.cshtml" />
+    <Content Include="Areas\Default\Views\About\Warranty.cshtml" />
+    <Content Include="Areas\Default\Views\Checkout\AddressAndPayment.cshtml" />
+    <Content Include="Areas\Default\Views\Checkout\Complete.cshtml" />
+    <Content Include="Areas\Default\Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Areas\Default\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Default\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\CatalogCategory.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\CatalogStones.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\DefaultLayout.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\InformPaymentConfirm.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\ItemInfoView.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\Lockout.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Default\Views\ShoppingCart\CartSummary.cshtml" />
+    <Content Include="Areas\Default\Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Areas\Default\Views\Store\Index.cshtml" />
+    <Content Include="Areas\Default\Views\Store\InformPayment.cshtml" />
+    <Content Include="Areas\Default\Views\Store\Search.cshtml" />
+    <Content Include="Areas\Default\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Default\Views\Account\MustConfirmEmail.cshtml" />
+    <Content Include="Areas\Default\Views\Account\UserProfile.cshtml" />
+    <Content Include="Areas\Default\Views\Manage\ChangePasswordSuccess.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\fine-uploader\ajax.requester.js" />
+    <Content Include="Scripts\fine-uploader\all.js" />
+    <Content Include="Scripts\fine-uploader\button.js" />
+    <Content Include="Scripts\fine-uploader\deletefile.ajax.requester.js" />
+    <Content Include="Scripts\fine-uploader\dnd.js" />
+    <Content Include="Scripts\fine-uploader\handler.base.js" />
+    <Content Include="Scripts\fine-uploader\handler.form.js" />
+    <Content Include="Scripts\fine-uploader\handler.xhr.js" />
+    <Content Include="Scripts\fine-uploader\header.js" />
+    <Content Include="Scripts\fine-uploader\iframe.xss.response.js" />
+    <Content Include="Scripts\fine-uploader\jquery-plugin.js" />
+    <Content Include="Scripts\fine-uploader\uploader.basic.js" />
+    <Content Include="Scripts\fine-uploader\uploader.js" />
+    <Content Include="Scripts\fine-uploader\util.js" />
+    <Content Include="Scripts\fine-uploader\window.receive.message.js" />
+    <Content Include="Scripts\Jcrop\jquery.Jcrop.js" />
+    <Content Include="Scripts\Jcrop\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.arcticmodal\jquery.arcticmodal-0.3.css" />
+    <Content Include="Scripts\jquery.arcticmodal\jquery.arcticmodal-0.3.min.js" />
+    <Content Include="Scripts\jquery.arcticmodal\loading.gif" />
+    <Content Include="Scripts\jquery.arcticmodal\themes\dark.css" />
+    <Content Include="Scripts\jquery.arcticmodal\themes\simple.css" />
+    <Content Include="Scripts\jquery.jgrowl.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jQueryForm\jquery.form.js" />
+    <Content Include="Scripts\jQueryForm\jquery.form.min.js" />
+    <Content Include="Scripts\jsZoom\zoomsl-3.0.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SiteScripts\admin-delete-row-in-table.js" />
+    <Content Include="Scripts\SiteScripts\AutoComplete.js" />
+    <Content Include="Scripts\SiteScripts\DefaultLayoutScript.js" />
+    <Content Include="Scripts\SiteScripts\PhotoAdminFunction.js" />
+    <Content Include="Scripts\SiteScripts\PopupProductDetails.js" />
+    <Content Include="Scripts\SiteScripts\StoreFunctions.js" />
+    <Content Include="Scripts\SiteScripts\ShoppingCartFunction.js" />
+    <Content Include="Scripts\SiteScripts\ShoppingCartGlobal.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Default\Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Areas\Default\Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Areas\Default\Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Default\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Default\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Default\Views\Account\ResetPassword.cshtml" />
+    <Content Include="Areas\Default\Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Default\Views\Account\SendCode.cshtml" />
+    <Content Include="Areas\Default\Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Default\Models\" />
+    <Folder Include="Content\images\Temp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResources\GlobalResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506251355282_first.resx">
+      <DependentUpon>201506251355282_first.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>7201</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:7201/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

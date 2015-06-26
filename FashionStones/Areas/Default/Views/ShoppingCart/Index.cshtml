@@ -1,0 +1,78 @@
+﻿@model FashionStones.ViewModel.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Корзина";
+    Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
+}
+
+<script src="~/Scripts/SiteScripts/ShoppingCartFunction.js"></script>
+<td>
+    <div class="dostavka">
+        <div class="content_in">
+            <h3>
+                Просмотр корзины
+            </h3>
+            @if (!@Model.CartItems.Any())
+            {
+                <p class="update"> Ваша корзина пуста </p>
+            }
+            else
+            {
+            <div class="button order">
+                @Html.ActionLink("Оформить заказ", "AddressAndPayment", "Checkout")
+            </div>
+            <div class="button clear_order">
+                @Html.ActionLink("Очистить корзину", "CleanCart", null, new {@class = "CleanLink"})
+            </div>
+            <div style="clear: both"></div>
+            <div id="update-message" class="update" style="position: absolute; top: 85px;"></div>
+            <table class="trash">
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Фото
+                    </th>
+                    <th>
+                       Количество
+                    </th>
+                    <th>
+                        Цена (грн)
+                    </th>
+                    <th>
+                        Сумма (грн)
+                    </th>
+                    <th></th>
+                </tr>
+               @foreach (var item in Model.CartItems)
+               {
+                <tr id="row-@item.Id">
+                    <td>
+                        @item.Product.Name
+                    </td>
+                    <td>
+                        <img width="100" src="@item.Product.JewelPHoto.PathToSmall">
+                    </td>
+                    <td>
+                       <div>
+                            <input type="button" tr-id="@item.Id" class="btn_count_down">
+                            <input type="number" tr-id="@item.Id" class="inp_count" value="@item.Count">
+                            <input type="button" tr-id="@item.Id" class="btn_count_up">
+                        </div>
+                    </td>
+                    <td>@item.Price.ToString("F2")</td>
+                    <td class="item-total-price" tr-id="@item.Id">@item.TotalPrice</td>
+                    <td><a href="@Url.Action("RemoveFromCart",new {id=item.Id})" class="RemoveLink red" data-id="@item.Id">удалить</a></td>
+                    </tr>
+                }
+                <tr>
+                    <td>Общая сумма (грн) </td>
+                    <td id="cart-total">@Model.CartTotal.ToString("F2") </td>
+                    <td colspan="4"></td>
+               </tr>
+            </table>
+
+            }
+        </div>
+    </div>
+</td>

@@ -1,0 +1,160 @@
+﻿@model FashionStones.Models.Domain.Entities.Order
+@{
+    ViewBag.Title = "Оформление заказа";
+    Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
+}
+<td>
+    <div class="dostavka">
+        <div class="content_in">
+            @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.Total)
+                <fieldset>
+                <legend class="adress">Оформление заказа</legend>
+
+                <table class="center_table">
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" }) 
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.LastName, new {htmlAttributes = new {@class = "form-control"}})
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </td>
+                        <td class="editor-field">
+                             @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                       </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.MethodOfDeliveryId, null, htmlAttributes:
+                            new { @class = "control-label col-md-2" })
+                        </td>
+                        <td class="editor-field">
+                            @Html.DropDownList("MethodOfDeliveryId", null, htmlAttributes: new { @class = "form-control" })
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.MethodOfDeliveryId, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.MethodOfPaymentId, null, htmlAttributes:
+                            new { @class = "control-label col-md-2" })
+                        </td>
+                        <td class="editor-field">
+                            @Html.DropDownList("MethodOfPaymentId", null, htmlAttributes: new { @class = "form-control" })
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.MethodOfPaymentId, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Country, null, htmlAttributes:
+                            new { @class = "control-label col-md-2" })
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.City, null, htmlAttributes:
+                            new { @class = "control-label col-md-2" })
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.TextInfo, null, htmlAttributes:
+                            new { @class = "control-label col-md-2" })
+                        </td>
+                        <td class="editor-field">
+                            @Html.TextAreaFor(model => model.TextInfo,
+                         new { placeholder = "Адрес или №отделения"  })
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.TextInfo, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                </table>
+
+                <p>
+                    <input type="submit" value="Заказать" class="button_submit" />
+                </p>
+            </fieldset>
+            }
+
+            <div class="adress left" width="200px">
+                @Html.ActionLink("Вернуться в корзину", "Index", "ShoppingCart")
+            </div>
+
+            <div class="right_float" style="width: 600px; text-align: justify;">
+                    <span class="red">*</span> Тип оплаты: (при получении: доставка товара + обратная доставка денег. На карту Приват Банка по предоплате, Вы платите только за доставку товара)
+            </div>
+
+        </div>
+
+    </div>
+</td>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

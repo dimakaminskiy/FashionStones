@@ -1,0 +1,114 @@
+﻿@using FashionStones.Utils
+@model ProductViewModel
+
+@{
+ Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";  
+ int count = 0; 
+}
+
+<script src="~/Scripts/SiteScripts/ShoppingCartGlobal.js"></script>
+<link href="~/Scripts/jquery.arcticmodal/jquery.arcticmodal-0.3.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.arcticmodal/jquery.arcticmodal-0.3.min.js"></script>
+<link href="~/Scripts/jquery.arcticmodal/themes/dark.css" rel="stylesheet"/>
+<script src="~/Scripts/SiteScripts/StoreFunctions.js"></script>
+<td colspan="3">  
+    @using (Html.BeginForm("Index", "Store", FormMethod.Post, new {@id = "sub-form-limit"}))
+    {
+        <input id="catId" type="hidden" name="catId" value="@Model.CategoryId">
+        <input id="catName" type="hidden" name="catName" value="@Model.CategoryName">
+        <input id="page" type="hidden" name="page" value="@Model.PageNo">
+        <input id="limit" type="hidden" name="limit" value="@Model.ItemPerPage">
+        <input id="stoneId" type="hidden" name="stoneId" value="@Model.StoneId">
+        <input id="stone" type="hidden" name="stone" value="@Model.Stone">
+        <input id="sort" type="hidden" name="sort"value="@Model.Sort">
+        <input id="search" type="hidden" name="search" value="@Model.SearchString">
+    }    
+    <div id="filters">
+        <div class="right_float">
+                @Html.DropDownListFor(m=>m.ItemPerPage,Model.LimitOptions,new { @onchange = "CallChangefunc(this.value)" })
+            </div>
+        @Html.SortOptionsLink(string.IsNullOrEmpty(Model.Sort)?Model.DefSortOption:Model.Sort, Model.SortOptions,
+        x => Url.Action("Index", "Store", new { page = 1, limit = Model.ItemPerPage, sort = x }))
+   </div>
+</td>
+
+    @if (Model.List.Any())
+    {        
+        foreach (var item in Model.List)
+        {
+            if (@count == 0)
+            {
+                @Html.Raw("<tr><td td-class='" + @item.Id + "'>")
+            }
+            else
+            {
+                @Html.Raw("<td td-class='"+@item.Id+"'>")
+            }
+            <div tr-id ="fName-@item.Id">
+                <a href="@Url.Action("Details","Products", new {id=item.Id})"
+                   class="name_goods block clickDetail">@item.FullName</a>
+            </div>
+            <div class="relative" style="width: 200px; margin: auto;">
+            <div id="prop-@item.Id" class="absolute none info" onmouseover="showd(@item.Id)" onmouseout="hided(@item.Id)">
+                    @Html.Partial("ItemInfoView",item)
+            </div>
+                        <a href="@item.JewelPHoto.PathToBig" class="goods_img relative clickImgGallery"
+                            tr-id="@item.Id" onmouseover="showd(@item.Id)" onmouseout="hided(@item.Id)">
+                            <img class="preview" tr-id="preview-@item.Id" src="@item.JewelPHoto.PathToSmall"/>
+                        </a>           
+            </div>
+            <div class="catalog_price">Есть в наличии</div>
+        if (User.Identity.IsAuthenticated)
+        {
+            <div>@Html.LabelFor(model => item.TradePrice):<span tr-id="price-@item.Id" class="price"> @item.TradePrice</span></div>
+        }
+        else
+        {
+            <div>@Html.LabelFor(model => item.RetailPrice):<span tr-id="price-@item.Id" class="price"> @item.RetailPrice</span></div>
+        }
+          <div class="option" tr-id="option-@item.Id">
+                Количество:
+                <input type="button" tr-id="@item.Id" class="btn_count_down">
+                <input type="number" tr-id="@item.Id" class="inp_count" value="1">
+                <input type="button" tr-id="@item.Id" class="btn_count_up">
+            </div>
+            <div class="buy_button">
+                <button class="button_submit btn_addToCart" tr-id="@item.Id">Купить</button>
+            </div>
+            @Html.Raw("</td>")
+            count++;
+            if (count == 3)
+            {
+                count = 0;
+                @Html.Raw("</tr>")
+            }
+        }
+        if (count != 0)
+        {
+            @Html.Raw("<td colspan=" + (3 - count) + "></tr>")
+        }
+        <tr>
+            <td colspan="3">
+                <div style="clear: both;">
+
+                    @if (Model.CountPage > 1)
+                    {                      
+                       
+                        @Html.PageLinks(Model.PageNo,Model.CountPage,x=>Url.Action("Index", 
+                       new
+                       {
+                           page=x,
+                           limit=Model.ItemPerPage,
+                           catId=Model.CategoryId,
+                           catName=Model.CategoryName,
+                           stoneId=Model.StoneId,
+                           stone=Model.Stone,
+                           sort=Model.Sort,
+                           search=Model.SearchString,
+                           
+                       }))
+                    }
+                </div>
+            </td>
+        </tr>
+}

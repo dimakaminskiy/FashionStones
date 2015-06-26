@@ -1,0 +1,78 @@
+﻿@*<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        @RenderSection("head", required: false)
+    </head>
+    <body>
+        @RenderBody()
+    </body>
+</html>
+<!DOCTYPE html>*@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/StyleAdmin.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+   
+    <link rel="shortcut icon" href=@Url.Content("~/Content/images/Logo.ico")>
+
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $("#top-link").hide();
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#top-link').fadeIn();
+                } else {
+                    $('#top-link').fadeOut();
+                }
+            });
+
+            $('#top-link').click(function () {
+                $('body, html').animate(
+                { scrollTop: 0 }, 800); return false;
+            });
+
+
+        });
+
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+</head>
+<body>
+
+    <div id="top-link" class="up">
+        <a href="#top"></a>
+    </div>
+
+
+    <div class="page">
+        <div id="content">
+            <div id="marg">
+                <div id="title"> <a href="@Url.Action("Index", "Store", new { area = "Default" })"> </a> </div><!--title-->
+
+                <div id="menu">
+                    @{Html.RenderAction("Menu", "Home", new { area = "Admin" });}
+                </div><!--menu-->
+
+                <div id="all">
+                    <div id="table">
+                        <div>
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+
+            </div><!--marg-->
+        </div><!--content-->
+    </div><!--page-->
+
+</body>
+</html>

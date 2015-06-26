@@ -1,0 +1,147 @@
+﻿@model FashionStones.Models.Domain.Entities.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cover.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cover.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JewelPHoto.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JewelPHoto.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Markup.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Markup.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Material.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Material.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stone.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stone.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lenght)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lenght)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfPublishing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfPublishing)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityInStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityInStock)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
