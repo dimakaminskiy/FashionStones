@@ -5,11 +5,13 @@
     Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
 <h2>Заказ № @Model.First().OrderId</h2>
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
-<script type="text/javascript">
- 
+<link href="~/Content/dialog.css" rel="stylesheet" />
+<script src="~/Scripts/SiteScripts/admin-delete-row-in-table.js"></script>
 
+<script type="text/javascript">
     (function($) {
         var recordToDelete;
         var theHREF;
@@ -62,11 +64,6 @@
             }
         });
     })(jQuery);
-
-
-    
-
-
 </script>
 
 
@@ -75,21 +72,21 @@
      <table>
             <tr>
                 <th>
-                    Название
+                    Артикул
                 </th>
                 <th>
                     Категория
                 </th>
        
                 <th>
-                    Упаковка (г)
+                    Цена (грн)
                 </th>
                 <th>
                     Количество
                 </th>
                 <th>
                 
-                    Цена (грн)
+                    Сумма (грн)
                 </th>
                  <th>
                 

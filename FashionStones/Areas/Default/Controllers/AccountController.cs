@@ -145,21 +145,7 @@ namespace FashionStones.Areas.Default.Controllers
         public ActionResult Register()
         {
             ViewBag.CountryId = new SelectList(DataManager.Coutries.GetAll().ToList(), "Id", "Name");
-
-            RegisterViewModel model = new RegisterViewModel
-            {
-                Email = "dimakaminskiy@gmail.com",
-                FirstName = "Dima",
-                Phone = "+380937362716",
-                City = "0",
-                LastName = "-",
-                MiddleName = "9",
-                Password = "123123",
-                ConfirmPassword = "123123"
-             };
-
-
-            return View(model);
+            return View();
         }
 
         //
@@ -199,10 +185,11 @@ namespace FashionStones.Areas.Default.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    EmailSettings settings = new EmailSettings();
 //                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                     await UserManager.SendEmailAsync(user.Id, "Регистрация", GetRegisterMessge("FS", callbackUrl));
+                     await UserManager.SendEmailAsync(user.Id, "Регистрация", GetRegisterMessge(settings.Link, callbackUrl));
                     return View("MustConfirmEmail", model);
                 }
                 AddErrors(result);

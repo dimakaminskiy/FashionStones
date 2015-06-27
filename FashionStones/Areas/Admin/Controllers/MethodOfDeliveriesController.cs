@@ -87,6 +87,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(methodOfDelivery);
         }
 
@@ -96,6 +101,12 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             MethodOfDelivery methodOfDelivery = db.MethodOfDeliveries.Find(id);
+
+            if (methodOfDelivery.Orders.Any())
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены записи покупок с выбраным типом доставки. Удаление невозможно" });
+            }
+
             db.MethodOfDeliveries.Remove(methodOfDelivery);
             db.SaveChanges();
             return RedirectToAction("Index");

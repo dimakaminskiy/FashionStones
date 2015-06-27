@@ -161,6 +161,7 @@ namespace FashionStones.Models.Domain.Entities
             public int Id { get; set; }
             [Display(ResourceType = typeof(GlobalResource), Name = "MethodOfDeliveryName")]
             public string Name { get; set; }
+            public virtual ICollection<Order> Orders { get; set; }
         }
 
         public class MethodOfPayment
@@ -168,6 +169,7 @@ namespace FashionStones.Models.Domain.Entities
             public int Id { get; set; }
             [Display(ResourceType = typeof(GlobalResource), Name = "MethodOfPaymentName")]
             public string Name { get; set; }
+            public virtual ICollection<Order> Orders { get; set; }
         }
 
 }

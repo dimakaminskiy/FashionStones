@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using FashionStones.Models;
 using FashionStones.Models.Domain.Entities;
@@ -102,6 +98,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(markup);
         }
 
@@ -111,6 +112,10 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Markup markup = db.Markups.Find(id);
+            if (markup.Products.Any())
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены записи товара с данной наценкой. Удаление невозможно" });
+            }
             db.Markups.Remove(markup);
             db.SaveChanges();
             return RedirectToAction("Index");

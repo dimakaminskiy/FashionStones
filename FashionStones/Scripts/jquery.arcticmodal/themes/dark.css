@@ -1,7 +1,7 @@
 .box-modal {
 	position: relative;
 	width: auto;
-	padding: 16px;
+	padding: 16px 70px;
 	background: url('/Content/images/hd-black-wallpaper.jpg');
 	color: #fff;
     font:  100 16px "Comic Sans MS", Verdana, Arial, Helvetica, sans-serif;
@@ -10,10 +10,12 @@
 }
 .box-modal_close { position: absolute; right: 10px; top: 6px; cursor: pointer;display: block;width: 25px;height: 25px;background: url('/Content/images/close-icons.png');background-size: contain; opacity: 0.8}
 .box-modal_close:hover { 	opacity: 1.0; }
-
-#exampleModal {
+/*#exampleModalImg.box-modal {
+    padding: 16px 70px;
+}*/
+/*#exampleModal {
     width: 700px;
-}
+}*/
 #exampleModal input[type="number"] {
     width: 50px;
 }
@@ -32,19 +34,17 @@
 .arrow-left, .arrow-right {
     position: absolute;
     top: 50%;
-    margin-top: -35px;
-    width: 100px;
-    height: 70px;
+    margin-top: -20px;
+    width: 60px;
+    height: 40px;
 }
 .arrow-left {
     left: 5px;
     background: url('/Content/images/arrow-left.png') no-repeat;
-    background-size: contain;
 }
 .arrow-right {
     right: 5px;
     background: url('/Content/images/arrow-right.png') no-repeat;
-    background-size: contain;
 }
 
 .arrow-left a, .arrow-right a {

@@ -4,9 +4,8 @@
         <h3>Управление</h3>
         Пользователи
         <ul>
-            <li>Заявки</li>
-            <li>@Html.ActionLink("Все", "Index", "Users", new { area = "Admin" }, null)</li>
-            <li>Заблокированые</li>
+            <li>@Html.ActionLink("Оптовики", "Index", "Users", new { area = "Admin" }, null)</li>
+            <li>@Html.ActionLink("Заблокированные", "BannedUsers", "Users", new { area = "Admin" }, null)</li>
         </ul>
         Заказы
         <ul>

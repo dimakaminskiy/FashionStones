@@ -25,13 +25,14 @@
     </div>
 </div>       
     <div id="header">
-    <div id="header_a" class="center">
-        <div class="left margin10"><a href="@Url.Action("Index", "About")" class="block padding5">О комании</a>
-        </div>
-        <div class="left margin10">
-            <a href="@Url.Action("Index", "Home", new {area = "Admin"})" class="block padding5">Админка</a>
-        </div>
-    </div>
+        <div id="header_a" class="center">
+            @if (Request.IsAuthenticated && User.IsInRole("Administrators"))
+            {
+                <div class="left margin10">
+                    <a href="@Url.Action("Index", "Home", new {area = "Admin"})" class="block padding5">Админка</a>
+                </div>
+            }
+               </div>
     <div> @{Html.RenderAction("CartSummary", "ShoppingCart");} </div>
     <div id="message_y" class="absolute">
         <div id="message"></div>
@@ -81,7 +82,7 @@
                @Html.Partial("_LoginPartial", new LoginViewModel())                  
                @Html.Action("CatalogCategory", "Store")
                 <div id="FS">
-                    <a href="@Url.Action("Index", "Home")">
+                    <a href="@Url.Action("Index", "About")">
                         <img src="/Content/images/Fs_mini.png" class="shadow">
                     </a>
                 </div>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Services.Description;
 using FashionStones.Models;
 using FashionStones.Models.Domain.Entities;
 using FashionStones.Utils;
@@ -296,7 +296,7 @@ namespace FashionStones.Areas.Admin.Controllers
         // GET: Admin/Products/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+           if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -305,6 +305,13 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
+            
             return View(product);
         }
 
@@ -314,6 +321,18 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+
+            var carts = db.Carts.Where(t => t.ProductId == id).ToList();
+            foreach (var cart in carts)
+            {
+                db.Carts.Remove(cart);
+            }
+            db.SaveChanges();
+            if (db.OrderDetails.Any(t => t.ProductId == id))
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены записи покупки даного товара. Удаление невозможно" });
+            }
+        
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

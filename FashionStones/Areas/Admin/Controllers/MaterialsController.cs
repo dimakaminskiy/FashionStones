@@ -89,6 +89,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(material);
         }
 
@@ -98,6 +103,10 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Material material = db.Materials.Find(id);
+            if (material.Products.Any())
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены записи товара с данным материалом. Удаление невозможно" });
+            }
             db.Materials.Remove(material);
             db.SaveChanges();
             return RedirectToAction("Index");

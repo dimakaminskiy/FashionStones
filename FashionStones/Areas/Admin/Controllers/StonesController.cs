@@ -83,6 +83,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(stone);
         }
 
@@ -92,6 +97,11 @@ namespace FashionStones.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Stone stone = await db.Stones.FindAsync(id);
+
+            if (stone.Products.Any())
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены записи товара с данным камнем. Удаление невозможно" });
+            }
             db.Stones.Remove(stone);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

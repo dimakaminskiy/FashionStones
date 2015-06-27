@@ -21,21 +21,6 @@ namespace FashionStones.Areas.Admin.Controllers
             return View(db.MethodOfPayments.ToList());
         }
 
-        // GET: Admin/MethodOfPayments/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MethodOfPayment methodOfPayment = db.MethodOfPayments.Find(id);
-            if (methodOfPayment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(methodOfPayment);
-        }
-
         // GET: Admin/MethodOfPayments/Create
         public ActionResult Create()
         {
@@ -102,6 +87,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(methodOfPayment);
         }
 
@@ -111,6 +101,10 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             MethodOfPayment methodOfPayment = db.MethodOfPayments.Find(id);
+            if (methodOfPayment.Orders.Any())
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены записи товара с данным типом оплаты. Удаление невозможно" });
+            }
             db.MethodOfPayments.Remove(methodOfPayment);
             db.SaveChanges();
             return RedirectToAction("Index");

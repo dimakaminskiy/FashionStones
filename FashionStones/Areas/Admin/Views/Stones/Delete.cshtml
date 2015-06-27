@@ -6,10 +6,10 @@
 }
 
 <h3>Вы уверены что хотите удалить данный камень?</h3>
-<h4>После выполнения этого действия будет удален весь товар с данным камнем. </h4>
 <div>
  <hr />
     <dl class="dl-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <dt>
             <h4>@Html.DisplayNameFor(model => model.Name)</h4>
         </dt>

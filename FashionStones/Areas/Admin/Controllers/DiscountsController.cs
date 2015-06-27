@@ -20,22 +20,6 @@ namespace FashionStones.Areas.Admin.Controllers
         {
             return View(db.Discounts.ToList().OrderBy(x=>x.Name));
         }
-
-        // GET: Admin/Discounts/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Discount discount = db.Discounts.Find(id);
-            if (discount == null)
-            {
-                return HttpNotFound();
-            }
-            return View(discount);
-        }
-
         // GET: Admin/Discounts/Create
         public ActionResult Create()
         {
@@ -102,6 +86,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(discount);
         }
 
@@ -111,6 +100,10 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Discount discount = db.Discounts.Find(id);
+            if (discount.Products.Any())
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены записи товара с данной скидкой. Удаление невозможно" });
+            }
             db.Discounts.Remove(discount);
             db.SaveChanges();
             return RedirectToAction("Index");

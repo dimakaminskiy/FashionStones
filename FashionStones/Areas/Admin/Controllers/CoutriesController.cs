@@ -89,6 +89,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(coutry);
         }
 
@@ -98,6 +103,10 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Coutry coutry = db.Coutries.Find(id);
+            if (db.Users.Any(t => t.CountryId == id))
+            {
+                return RedirectToAction("Delete", new { msg = "Обнаружены зарегистрированные пользователи данной страны. Удаление невозможно" });
+            }
             db.Coutries.Remove(coutry);
             db.SaveChanges();
             return RedirectToAction("Index");

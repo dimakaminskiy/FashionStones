@@ -18,6 +18,7 @@ namespace FashionStones.Models.Domain.Entities
         public string Name { get; set; }
         [Display(ResourceType = typeof(GlobalResource), Name = "DiscountValue")]
         public int Value { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
     public class Coutry
     {
@@ -43,6 +44,7 @@ namespace FashionStones.Models.Domain.Entities
             ErrorMessageResourceType = typeof (GlobalResource))]
         [Display(ResourceType = typeof (GlobalResource), Name = "MarkupTradeMarkup")]
         public int TradeMarkup { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
     public class Category
     {
@@ -229,6 +231,7 @@ namespace FashionStones.Models.Domain.Entities
             ErrorMessageResourceType = typeof (GlobalResource))]
         [Display(ResourceType = typeof (GlobalResource), Name = "ProductName")]
         public string Name { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
     public class Cover
     {
@@ -238,6 +241,7 @@ namespace FashionStones.Models.Domain.Entities
             ErrorMessageResourceType = typeof (GlobalResource))]
         [Display(ResourceType = typeof (GlobalResource), Name = "ProductCover")]
         public string Name { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
     public class Stone //камень
     {

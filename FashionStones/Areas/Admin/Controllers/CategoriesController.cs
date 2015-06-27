@@ -85,6 +85,11 @@ namespace FashionStones.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var error = Request.Params["msg"];
+            if (!string.IsNullOrEmpty(error))
+            {
+                ModelState.AddModelError("", error);
+            }
             return View(category);
         }
 
@@ -94,6 +99,14 @@ namespace FashionStones.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Categories.Find(id);
+
+
+            if (db.Products.Any(t => t.CategoryId == id))
+            {
+                return RedirectToAction("Delete", new { msg = "В даной категории обнаружены товары. Удаление невозможно" });
+            }
+        
+
             db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");

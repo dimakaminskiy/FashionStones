@@ -6,12 +6,9 @@
 }
 
 <h2>EditItemFromOrderDetails</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
         <h4>OrderDetail</h4>
         <hr />
@@ -22,7 +19,7 @@
         <div class="form-group">
            Количество единиц
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" ,min="1"} })
                 @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -115,12 +115,11 @@ namespace FashionStones.Utils
 
         private void CleanUpTempFolder(int hoursOld)
         {
+            DateTime fileCreationTime;
+            DateTime currentUtcNow = DateTime.UtcNow;
             try
             {
-                DateTime fileCreationTime;
-                DateTime currentUtcNow = DateTime.UtcNow;
-
-                var serverPath = TempFolder;
+             var serverPath = TempFolder;
                 if (Directory.Exists(serverPath))
                 {
                     string[] fileEntries = Directory.GetFiles(serverPath);

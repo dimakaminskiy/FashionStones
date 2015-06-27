@@ -10,6 +10,8 @@
 <div>
  <hr />
     <dl class="dl-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.DisplayNameFor(model => model.Name)
         <dt>
             <h4>@Html.DisplayNameFor(model => model.Name)</h4>
         </dt>

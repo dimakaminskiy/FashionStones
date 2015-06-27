@@ -7,11 +7,12 @@
 
 
 <h3>Вы уверены что хотите удалить скидку?</h3>
-<h4>Выполнение действия затронет товары с этой скидкой </h4>
+
 <div>
     <h4>Discount</h4>
     <hr />
     <dl class="dl-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>

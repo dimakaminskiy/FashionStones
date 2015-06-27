@@ -13,46 +13,17 @@ namespace FashionStones.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            ViewBag.Title = "Оптовики";
+            return View(db.Users.ToList().Where(t=>t.LockoutEnabled==false));
         }
 
-        // GET: Admin/Users/Details/5
-        public ActionResult Details(string id)
+        public ActionResult BannedUsers()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApplicationUser applicationUser = db.Users.Find(id);
-            if (applicationUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(applicationUser);
+
+            ViewBag.Title = "Заблокированные пользователи";
+            return View("Index",db.Users.ToList().Where(t => t.LockoutEnabled));
         }
 
-        // GET: Admin/Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LastName,FirstName,MiddleName,CountryId,City,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(applicationUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(applicationUser);
-        }
 
         // GET: Admin/Users/Edit/5
         public ActionResult Edit(string id)

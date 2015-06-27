@@ -101,7 +101,7 @@ namespace FashionStones.Areas.Default.Controllers
         {
             try
             {
-                var cart = ShoppingCart.GetCart(this.HttpContext,DataManager);
+                var cart = ShoppingCart.GetCart(HttpContext,DataManager);
                 cart.EmptyCart();
             }
             catch (Exception)
