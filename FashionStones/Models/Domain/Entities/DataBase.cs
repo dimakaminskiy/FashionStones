@@ -68,10 +68,45 @@ namespace FashionStones.Models.Domain.Entities
         
         public int Id { get; set; }
 
-        [Required(ErrorMessageResourceName = "ErrorMessageRequiredJewelName",
-            ErrorMessageResourceType = typeof (GlobalResource))]
+        [NotMapped]
+        [ScaffoldColumn(false)]
         [Display(ResourceType = typeof (GlobalResource), Name = "ProductName")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                StringBuilder builder = new StringBuilder();
+              
+                if (Category != null && Category.Name != "")
+                {
+                    builder.Append(" " + Category.Name);
+                }
+                if (Stone != null && Stone.Name != "")
+                {
+                    builder.Append(" " + Stone.Name);
+                }
+
+                else if (Material != null && Material.Name != "")
+                {
+                    builder.Append(" " + Material.Name);
+                }
+
+                else if (!string.IsNullOrEmpty(Diameter))
+                {
+                    builder.Append(" " + Diameter);
+                }
+                else if (!string.IsNullOrEmpty(Weight))
+                {
+                    builder.Append(" " + Weight);
+                }
+                else if (!string.IsNullOrEmpty(Lenght))
+                {
+                    builder.Append(" " + Lenght);
+
+                }
+                return builder.ToString(); ;
+            }
+        }
 
         [Display(ResourceType = typeof(GlobalResource), Name = "ProductCategoryId")]
         public int? CategoryId { get; set; }
@@ -154,33 +189,7 @@ namespace FashionStones.Models.Domain.Entities
             {
                 StringBuilder builder = new StringBuilder();
                 builder.Append(Id);
-                if (Category != null && Category.Name != "")
-                {
-                    builder.Append(" " + Category.Name);
-                }
-                  if (Stone != null && Stone.Name != "")
-                {
-                    builder.Append(" " + Stone.Name);
-                }
-
-                else if (Material != null && Material.Name != "")
-                {
-                    builder.Append(" " + Material.Name);
-                }
-
-                else if (!string.IsNullOrEmpty(Diameter) )
-                {
-                    builder.Append(" " + Diameter);
-                }
-                else if (!string.IsNullOrEmpty(Weight))
-                {
-                    builder.Append(" " + Weight);
-                }
-                else if (!string.IsNullOrEmpty(Lenght))
-                {
-                    builder.Append(" " + Lenght);
-
-                }
+                builder.Append(" " + Name);
                 return builder.ToString();
             }
         }

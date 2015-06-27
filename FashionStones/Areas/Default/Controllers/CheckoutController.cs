@@ -30,8 +30,6 @@ namespace FashionStones.Areas.Default.Controllers
 
         public ActionResult Complete(int id)
         {
-            bool isValid = true;
-
             if (DataManager.Orders.SearchFor(t => t.Id == id).Any())
             {
                  return View(id);

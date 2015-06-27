@@ -157,6 +157,8 @@ namespace FashionStones.ViewModel
 
         public int CreateOrder(Order order)
         {
+            var c = new OrderDetail();
+           
             order.OrderDate = DateTime.Now;
             order.OrderStatusId = 1; // новый заказ => статус не обработано
             order.Total = GetTotal(); // общую сумму пересчитаем!!!
@@ -168,7 +170,9 @@ namespace FashionStones.ViewModel
             {
                 OrderId = order.Id,
                 UnitPrice = item.Price,
-                Quantity = item.Count
+                Quantity = item.Count,
+                ProductId =  item.ProductId,
+               
             }))
             {
                 DataManager.OrderDetails.Insert(orderDetail);

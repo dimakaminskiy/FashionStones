@@ -68,7 +68,7 @@ namespace FashionStones.Areas.Admin.Controllers
             switch (sortOrder)
             {
                 case "NameDesc":
-                    productsToReturn = products.OrderByDescending(b => b.Name);
+                    productsToReturn = products.OrderByDescending(b => b.Id);
                     break;
                case "Price":
                     productsToReturn = products.OrderBy(b => b.ShoppingPrice);
@@ -83,7 +83,7 @@ namespace FashionStones.Areas.Admin.Controllers
                     productsToReturn = products.OrderByDescending(c => c.Category.Name);
                     break;
                 default:  // Name ascending 
-                    productsToReturn = products.OrderBy(b => b.Name);
+                    productsToReturn = products.OrderBy(b => b.Id);
                     break;
             }
 

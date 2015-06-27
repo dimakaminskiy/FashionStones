@@ -5,46 +5,12 @@ using FashionStones.App_LocalResources;
 
 namespace FashionStones.Models
 {
-    public class ExternalLoginConfirmationViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-    }
-
-    public class ExternalLoginListViewModel
-    {
-        public string ReturnUrl { get; set; }
-    }
-
-    public class SendCodeViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
-    }
-
-    public class VerifyCodeViewModel
-    {
-        [Required]
-        public string Provider { get; set; }
-
-        [Required]
-        [Display(Name = "Code")]
-        public string Code { get; set; }
-        public string ReturnUrl { get; set; }
-
-        [Display(Name = "Remember this browser?")]
-        public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
-    }
 
     public class ForgotViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessageResourceName = "ErrorMessageRequiredUserEmail", ErrorMessageResourceType = typeof(GlobalResource))]
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserEmail")]
+        [RegularExpression(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$", ErrorMessageResourceType = typeof(GlobalResource), ErrorMessageResourceName = "ErrorMessageRegularExpressionEmail")]
         public string Email { get; set; }
     }
 
@@ -54,9 +20,9 @@ namespace FashionStones.Models
         [Display(Name = "Телефон или e-mail")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorMessageRequiredUserPassword", ErrorMessageResourceType = typeof(GlobalResource))]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserPassword")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
@@ -87,8 +53,8 @@ namespace FashionStones.Models
         public string Phone { get; set; }
 
         [Required(ErrorMessageResourceName = "ErrorMessageRequiredUserEmail", ErrorMessageResourceType = typeof(GlobalResource))]
-        [EmailAddress]
         [Display(ResourceType = typeof(GlobalResource), Name = "UserEmail")]
+        [RegularExpression(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$", ErrorMessageResourceType = typeof(GlobalResource), ErrorMessageResourceName = "ErrorMessageRegularExpressionEmail")]
         public string Email { get; set; }
 
         [Required(ErrorMessageResourceName = "ErrorMessageRequiredUserPassword", ErrorMessageResourceType = typeof(GlobalResource))]
@@ -99,27 +65,28 @@ namespace FashionStones.Models
 
         [DataType(DataType.Password)]
         [Display(ResourceType = typeof(GlobalResource), Name = "UserPasswordRepeat")]
-        [System.Web.Mvc.Compare("Password", ErrorMessage = "Введенные пароли не совпадают")]
+        [Compare("Password", ErrorMessage = "Введенные пароли не совпадают")]
         public string ConfirmPassword { get; set; }
     }
 
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessageResourceName = "ErrorMessageRequiredUserEmail", ErrorMessageResourceType = typeof(GlobalResource))]
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserEmail")]
+        [RegularExpression(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$", ErrorMessageResourceType = typeof(GlobalResource), ErrorMessageResourceName = "ErrorMessageRegularExpressionEmail")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceName = "ErrorMessageRequiredUserPassword", ErrorMessageResourceType = typeof(GlobalResource))]
+        [StringLength(100, ErrorMessage = "Минимальная длина пароля {2} символов", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserPassword")]
+       
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserPasswordRepeat")]
+        [Compare("Password", ErrorMessage = "Введенные пароли не совпадают")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -127,9 +94,9 @@ namespace FashionStones.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessageResourceName = "ErrorMessageRequiredUserEmail", ErrorMessageResourceType = typeof(GlobalResource))]
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserEmail")]
+        [RegularExpression(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$", ErrorMessageResourceType = typeof(GlobalResource), ErrorMessageResourceName = "ErrorMessageRegularExpressionEmail")]
         public string Email { get; set; }
     }
 }

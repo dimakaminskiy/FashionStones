@@ -1,61 +1,52 @@
-﻿@model Web.ViewModels.ProduceCatalog
+﻿@model FashionStones.Models.Domain.Entities.OrderDetail
 
 @{
-    ViewBag.Title = "Редактирование выбранной позиции";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "EditItemFromOrderDetails";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>Редактирование выбранной позиции</h2>
+<h2>EditItemFromOrderDetails</h2>
 
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-<!--
-<script src="../../Scripts/DropDownListEventForEditListOrderDetail.js"></script>
-    -->
-<script src="../../Scripts/DropDownListEventForAddToListOrder.js"></script>
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Товар</legend>
-        
-        
-        @Html.HiddenFor(model => model.OrderId)
-         @Html.HiddenFor(model => model.OrderDetailId)
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SelectedCategoryId)
-        </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
     
-        <div class="editor-field">       
-                @Html.DropDownListFor(model=>model.SelectedCategoryId,Model.GetListCategory(),Model.SelectedCategoryId)
-        </div>
-                <div class="editor-label">
-            @Html.LabelFor(model => model.SelectedProduceId)
-        </div>
-        <div class="editor-field">
-                @Html.DropDownListFor(model=>model.SelectedProduceId,Model.GetListProduce(),Model.SelectedProduceId)
+    <div class="form-horizontal">
+        <h4>OrderDetail</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(m=>m.OrderId)
+
+        <div class="form-group">
+           Количество единиц
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SelectedPrepackageId)
-        </div>
-        <div class="editor-field">         
-                @Html.DropDownListFor(model=>model.SelectedPrepackageId,Model.GetListPrepackage(),Model.SelectedPrepackageId)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Count)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Count)
-            @Html.ValidationMessageFor(model => model.Count)
+        <div class="form-group">
+           Цена 1 единицы товара
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UnitPriceString, new { htmlAttributes = new { @class = "form-control" } })
+              
+            </div>
         </div>
 
-        <p>
-            <input type="submit" value="Сохранить" />
-        </p>
-    </fieldset>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 
 <div>
-    @Html.ActionLink(" К списку заказанной продукции", "EditOrder", new {id = Model.OrderId})
+    @Html.ActionLink(" К списку заказанной продукции", "EditOrder", new { id = Model.OrderId })
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,8 +1,8 @@
-﻿@model Web.ViewModels.OrderViewModel
+﻿@model  FashionStones.ViewModel.OrderViewModel
 
 @{
     ViewBag.Title = "Редактирование заказа";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
 
 <h2>Редактирование заказа</h2>
@@ -12,7 +12,7 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-
+    @*@Html.HiddenFor(t=>t.order.Total)*@
     <div class="content_in"> 
          
        <table id="editorder">
@@ -25,7 +25,7 @@
                    @Html.LabelFor(model => model.order.OrderDate)
                </td>
                <td class="editor-field">
-                   @Html.EditorFor(model => model.order.OrderDate)
+                   @Html.DisplayTextFor(model => model.order.OrderDate)
                    @Html.ValidationMessageFor(model => model.order.OrderDate)
                </td>
            </tr>
@@ -68,17 +68,6 @@
                </td>
            </tr>
            
-
- 
-           <tr>
-               <td class="editor-label">
-                   @Html.LabelFor(model => model.order.State)
-               </td>
-               <td class="editor-field">
-                   @Html.EditorFor(model => model.order.State)
-                   @Html.ValidationMessageFor(model => model.order.State)
-               </td>
-           </tr>
                      <tr>
                     <td class="editor-label">
                         @Html.LabelFor(model => model.order.City)
@@ -88,27 +77,8 @@
                         @Html.ValidationMessageFor(model => model.order.City)
                     </td>
                 </tr>
-
-           <tr>
-               <td class="editor-label">
-                   @Html.LabelFor(model => model.order.Address)
-               </td>
-               <td class="editor-field">
-                   @Html.EditorFor(model => model.order.Address)
-                   @Html.ValidationMessageFor(model => model.order.Address)
-               </td>
-           </tr>
            
-           <tr>
-               <td class="editor-label">
-                   @Html.LabelFor(model => model.order.PostalCode)
-               </td>
-               <td class="editor-field">
-                   @Html.EditorFor(model => model.order.PostalCode)
-                   @Html.ValidationMessageFor(model => model.order.PostalCode)
-               </td>
-           </tr>
-           <tr>
+          <tr>
                     <td class="editor-label">
                         @Html.LabelFor(model => model.order.Phone)
                     </td>
@@ -131,27 +101,47 @@
                    @Html.LabelFor(model => model.order.Total)
                </td>
                <td class="editor-field">
-                   @Html.EditorFor(model => model.order.Total)
+                   @Html.EditorFor(model => model.order.TotalPriceString)
                    @Html.ValidationMessageFor(model => model.order.Total)
                </td>
            </tr>
-                           <tr>
-                    <td class="editor-label">
-                        @Html.LabelFor(model => model.order.Username)
-                    </td>
-                    <td class="editor-field">
-                        @Html.EditorFor(model => model.order.Username)
-                        @Html.ValidationMessageFor(model => model.order.Username)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editor-label">
-                        Статус
-                    </td>
-                    <td class="editor-field">
-                        @Html.DropDownListFor(model=>model.order.OrderStatusId,(SelectList)ViewBag.OrderStatusId,Model.order.OrderStatusId)
-                    </td>
-                </tr>
+           <tr>
+               <td class="editor-label">
+                   @Html.LabelFor(model => model.order.TextInfo)
+               </td>
+               <td class="editor-field">
+                   @Html.EditorFor(model => model.order.TextInfo)
+                   @Html.ValidationMessageFor(model => model.order.TextInfo)
+               </td>
+           </tr>
+           <tr>
+
+               <td class="editor-label">
+                   @Html.LabelFor(model => model.order.MethodOfDeliveryId)
+               </td>
+               <td class="editor-field">
+                   @Html.DropDownListFor(model => model.order.MethodOfDeliveryId, (SelectList)ViewBag.MethodOfDeliveryId, Model.order.MethodOfDeliveryId)
+               </td>
+           </tr>
+           <tr>
+           <tr>
+
+               <td class="editor-label">
+                   @Html.LabelFor(model => model.order.MethodOfPaymentId)
+               </td>
+               <td class="editor-field">
+                   @Html.DropDownListFor(model => model.order.MethodOfPaymentId, (SelectList)ViewBag.MethodOfPaymentId, Model.order.MethodOfPaymentId)
+               </td>
+           </tr>
+           <tr>
+
+               <td class="editor-label">
+                   Статус
+               </td>
+               <td class="editor-field">
+                   @Html.DropDownListFor(model => model.order.OrderStatusId, (SelectList)ViewBag.OrderStatusId, Model.order.OrderStatusId)
+               </td>
+           </tr>
              
 
             </table>
@@ -163,41 +153,42 @@
         <table>
             <tr>
                 <th>
+                    Артикуль
+                </th>
+                <th>
                     Название
                 </th>
-                <th>
-                    Категория
-                </th>
-       
-                <th>
-                    Упаковка (г)
-                </th>
+               
+
                 <th>
                     Количество
                 </th>
                 <th>
-                
                     Цена (грн)
+                </th>
+                <th>
+
+                    Сумма (грн)
                 </th>
             </tr>
 
             @foreach (var item in Model.orderDetails) {
-                <tr id ="row-@item.ProduceInPackageId">
+                <tr id ="row-@item.Id">
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.Product.Id)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Category)
+                        @Html.DisplayFor(modelItem => item.Product.Name)
                     </td>
         
                     <td>
-                        @Html.DisplayFor(modelItem => item.Package)
+                        @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Count)        
+                        @Html.DisplayFor(modelItem => item.UnitPrice)        
                     </td>
                     <td>
-                        @String.Format("{0:0.00}", ( item.Count*item.Price))
+                        @Html.DisplayFor(model=>item.UnitTotalProce)
                     </td>
     
         

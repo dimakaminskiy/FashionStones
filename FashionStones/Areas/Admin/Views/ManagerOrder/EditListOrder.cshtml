@@ -1,70 +1,70 @@
-﻿@model Web.ViewModels.EditOrderDetailViewModel
+﻿@model IEnumerable<FashionStones.Models.Domain.Entities.OrderDetail>
 
 @{
     ViewBag.Title = "Редактирование списка покупок";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
-<h2>Заказ № @Model.OrderId</h2>
-<link href="../../Scripts/dialog.css" rel="stylesheet" />
-<script src="../../Scripts/jquery-1.7.1.js"></script>
-<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
-<script src="../../Scripts/Ajax.js"></script>
-
+<h2>Заказ № @Model.First().OrderId</h2>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
 <script type="text/javascript">
-    
-    var recordToDelete;
-    var theHREF;
-    $('.deleteLink').click(function (e) {
-        recordToDelete = $(this).attr("rowId");
-        e.preventDefault();
-        theHREF = $(this).attr("href");
+ 
 
+    (function($) {
+        var recordToDelete;
+        var theHREF;
+        $('.deleteLink').click(function (e) {
+            e.preventDefault();
+            recordToDelete = $(this).attr("rowId");
+         
+            theHREF = $(this).attr("href");
 
-        var message = $("#dialog-confirm p");
-        message.text("Вы уверены, что хотите удалить  позицию ?");
-      
-        $('#dialog-confirm').dialog('open');
-    });
-    $('#dialog-confirm').dialog({
-        autoOpen: false,
-        height: 280,
-        modal: true,
-        resizable: false,
-        buttons: {
-            'Продолжить': function () {
-                $.post(theHREF, null, function (json) {
-                    if (json.success) {
-                        $('#row-' + recordToDelete).fadeOut('slow');
-                    }
-                    else {
-                        var warrning = $("#div-dialog-warning  p").html();
-                        $("#div-dialog-warning  p").html(warrning + json.errorMessage);
-                        $("#div-dialog-warning").dialog({
-                            resizable: false,
-                            width: 500,
-                            height: 280,
-                            modal: true,
-                            buttons: {
-                                "Ок": function () {
+            $('#dialog-confirm').dialog('open');
+        });
+        $('#dialog-confirm').dialog({
+            autoOpen: false,
+            height: 280,
+            modal: true,
+            resizable: false,
+            buttons: {
+                'Продолжить': function () {
+                    $.post(theHREF, null, function (json) {
+                        if (json.success) {
+                            $('#row-' + recordToDelete).fadeOut('slow');
+                        }
+                        else {
+                            var warrning = $("#div-dialog-warning  p").html();
+                            $("#div-dialog-warning  p").html(warrning + json.errorMessage);
+                            $("#div-dialog-warning").dialog({
+                                resizable: false,
+                                width: 500,
+                                height: 280,
+                                modal: true,
+                                buttons: {
+                                    "Ок": function () {
 
-                                    $(this).dialog("close");
+                                        $(this).dialog("close");
+                                    }
+                                },
+                                close: function () {
+                                    $("#div-dialog-warning  p").html(warrning);
+
                                 }
-                            },
-                            close: function () {
-                                $("#div-dialog-warning  p").html(warrning);
-
-                            }
-                        }).parent().addClass("ui-state-error");
-                    }
+                            }).parent().addClass("ui-state-error");
+                        }
+                    },
+           'json');
+                    $(this).dialog('close');
                 },
-       'json');
-                $(this).dialog('close');
-            },
-            'Отмена': function () {
-                $(this).dialog('close');
+                'Отмена': function () {
+                    $(this).dialog('close');
+                }
             }
-        }
-    });
+        });
+    })(jQuery);
+
+
+    
 
 
 </script>
@@ -72,11 +72,6 @@
 
 
 <div class="content_in">
-
-    <h2>
-        @Html.ActionLink("Добавить  новый товар  в список покупок", "AddToListOrder", new {  id= Model.OrderId }) 
-    </h2>
-
      <table>
             <tr>
                 <th>
@@ -102,23 +97,23 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.list) {
+            @foreach (var item in Model) {
                 <tr  id ="row-@item.Id">
                     <td>
-                        @Html.DisplayFor(modelItem => item.Producer)
+                        @Html.DisplayFor(modelItem => item.ProductId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Category)
+                        @Html.DisplayFor(modelItem => item.Product.Name)
                     </td>
         
                     <td>
-                        @Html.DisplayFor(modelItem => item.Package)
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Quantity)        
                     </td>
                     <td>
-                        @String.Format("{0:0.00}", ( item.Quantity*item.UnitPrice))
+                       @Html.DisplayFor(modelItem => item.UnitTotalProce)
                     </td>
     
                     <td>
@@ -136,7 +131,7 @@
 </div>
 
 <p>
-    @Html.ActionLink("К заказу", "EditOrder", new {  id=Model.OrderId }) 
+    @Html.ActionLink("К заказу", "EditOrder", new {  id=Model.First().OrderId }) 
 
 </p>
 

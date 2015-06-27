@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using FashionStones.App_LocalResources;
+using WebGrease;
 
 
 namespace FashionStones.Models.Domain.Entities
@@ -16,6 +18,7 @@ namespace FashionStones.Models.Domain.Entities
 
         public int Id { get; set; }
         [Display(ResourceType = typeof(GlobalResource), Name = "OrderDataTime")]
+        [DataType(DataType.Text)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy  HH:mm}",
                ApplyFormatInEditMode = true)]
         public DateTime? OrderDate { get; set; }
@@ -43,7 +46,35 @@ namespace FashionStones.Models.Domain.Entities
         [Display(ResourceType = typeof(GlobalResource), Name = "UserEmail")]
         [RegularExpression(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$", ErrorMessageResourceType = typeof(GlobalResource),ErrorMessageResourceName = "ErrorMessageRegularExpressionEmail")]
         public string Email { get; set; }
-       
+
+
+        [NotMapped]
+        public string TotalPriceString
+        {
+            get
+            {
+                return  Total.HasValue ?(Total.Value).ToString("F2"):0.ToString();
+             }
+            set
+            {
+                try
+                {
+                    string buf = value;
+                    if (buf.Contains("."))
+                    {
+                       buf= buf.Replace(".", ",");
+                    }
+                    Total = double.Parse(buf);
+                }
+                catch (Exception)
+                {
+                    Total = 0;
+                }
+            }
+
+        }
+
+
         [Display(ResourceType = typeof(GlobalResource), Name = "OrderTotalCount")]
         public double? Total { get; set; }
         [Display(ResourceType = typeof(GlobalResource), Name = "OrderCountry")]
@@ -51,6 +82,7 @@ namespace FashionStones.Models.Domain.Entities
         [Display(ResourceType = typeof(GlobalResource), Name = "OrderCity")]
         public string City { get; set; }
         [Display(ResourceType = typeof(GlobalResource), Name = "OrderTextInfo")]
+        [DataType(DataType.MultilineText)]
         public string TextInfo { get; set; }
         
         public int OrderStatusId { get; set; }
@@ -69,11 +101,48 @@ namespace FashionStones.Models.Domain.Entities
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
-        public string Name { get; set; }
+        public int ProductId { get; set; }
         public int Quantity { get; set; }
+            [DataType(DataType.Text)]
         public double UnitPrice { get; set; }
+
+        [NotMapped]
+        public string UnitPriceString
+        {
+            get
+            {
+                return UnitPrice.ToString("F2");  
+            }
+            set
+            {
+                try
+                {
+                    string buf = value;
+                    if (buf.Contains("."))
+                    {
+                        buf = buf.Replace(".", ",");
+                    }
+                    UnitPrice = double.Parse(buf);
+            }
+                catch (Exception)
+                {
+                    UnitPrice = 0;
+                }
+            }
+
+        }
+
+        [NotMapped]
+        public string UnitTotalProce
+        {
+            get { return(Quantity*UnitPrice).ToString("F2"); }
+
+        }
+
+
         public virtual Order Order { get; set; }
-     }
+        public virtual Product Product { get; set; }
+        }
 
         public partial class OrderStatus
     {
