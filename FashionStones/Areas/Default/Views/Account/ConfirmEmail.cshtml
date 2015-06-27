@@ -1,16 +1,12 @@
 ﻿@{
-    Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";  
+    Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
     ViewBag.Title = "Подтверждение e-mail";
 }
 
-
-
-<div id="Gif">
-    <table id="LogInMy">
-        <tr>
-            <td>
-                Адрес вашей почты подтвержден. Пожалуйста, щелкните @Html.ActionLink("здесь", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) для входа в систему.
-            </td>
-        </tr>
-    </table>
-</div>
+<td>
+    <div class="dostavka">
+        <p class="center">
+            Адрес Вашей почты подтвержден. Пожалуйста, щелкните @Html.ActionLink("здесь", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) для входа в систему.
+        </p>
+    </div>
+</td>

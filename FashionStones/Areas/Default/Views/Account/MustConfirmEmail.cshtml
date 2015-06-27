@@ -1,17 +1,16 @@
 ﻿@model  FashionStones.Models.RegisterViewModel
 @{
-    ViewBag.Title = "MustConfirmEmail";
+    ViewBag.Title = "Регистрация";
     Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
 }
 <td>
-<div class="dostavka center">
-    <div id="Gif">
-        <table id="LogInMy">
+<div class="dostavka">
+        <table id="LogInMy" class="center_table">
             <caption>
-                Добро пожаловать, @Model.FirstName
+                Добро пожаловать, @Model.FirstName.
             </caption>
             <tr>
-                <td>Перейдите по ссылке из письма и завершите регистрацию</td>
+                <td>Перейдите по ссылке из письма и завершите регистрацию.</td>
             </tr>
             <tr>
                 <td>Мы отправили его на адрес: @Model.Email</td>
@@ -24,5 +23,4 @@
 
         </table>
     </div>
-</div>
 </td>
