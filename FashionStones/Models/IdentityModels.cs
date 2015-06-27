@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using FashionStones.App_LocalResources;
 using FashionStones.Models.Domain.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -20,10 +22,15 @@ namespace FashionStones.Models
 
             return userIdentity;
         }
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserLastName")]
         public string LastName { get; set; }
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserFirstName")]
         public string FirstName { get; set; }
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserMiddleName")]
         public string MiddleName { get; set; }
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserCoutrry")]
         public int CountryId { get; set; }
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserCity")]
         public string City { get; set; }
     }
 
@@ -52,6 +59,8 @@ namespace FashionStones.Models
         public virtual DbSet<Stone> Stones { get; set; }
         public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Product> Products { get; set; } 
+        public virtual DbSet<Product> Products { get; set; }
+
+       
     }
 }

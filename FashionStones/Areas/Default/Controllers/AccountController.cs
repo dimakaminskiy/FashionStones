@@ -171,6 +171,20 @@ namespace FashionStones.Areas.Default.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                if (UserManager.Users.Any(t => t.Email == model.Email))
+                {
+                    ModelState.AddModelError("", "Пользователь с таким email уже зарегистрирован");
+                    ViewBag.CountryId = new SelectList(DataManager.Coutries.GetAll().ToList(), "Id", "Name", model.CountryId);
+                    return View(model);
+                }
+                if (UserManager.Users.Any(t => t.PhoneNumber == model.Phone))
+                {
+                    ModelState.AddModelError("", "Пользователь с таким телефоном уже зарегистрирован");
+                    ViewBag.CountryId = new SelectList(DataManager.Coutries.GetAll().ToList(), "Id", "Name", model.CountryId);
+                    return View(model);
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -185,7 +199,7 @@ namespace FashionStones.Areas.Default.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+//                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                      await UserManager.SendEmailAsync(user.Id, "Регистрация", GetRegisterMessge("FS", callbackUrl));
@@ -193,7 +207,6 @@ namespace FashionStones.Areas.Default.Controllers
                 }
                 AddErrors(result);
             }
-
             ViewBag.CountryId = new SelectList(DataManager.Coutries.GetAll().ToList(), "Id", "Name",model.CountryId);
           return View(model);
         }
@@ -235,12 +248,16 @@ namespace FashionStones.Areas.Default.Controllers
                     ModelState.AddModelError("", "Пользователь с таким e-mail не зарегистрирован.");
                     return View(model);
                 }
+
+                EmailSettings settings= new EmailSettings();
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Востановление пароля", 
-                    "Здравствуйте! <br/>Вы отправили запрос на восстановление пароля от почтового ящика "+user.Email+" .<br/>" +
-                    "Для того чтобы задать новый пароль, перейдите по  <a href=\"" + callbackUrl + "\">ссылке</a>");
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 await UserManager.SendEmailAsync(user.Id, "Восстановление пароля",
+                    "Здравствуйте! <br/>Вы отправили запрос на восстановление пароля от аккаунта " + user.Email +
+                    " .<br/>" +
+                    "Для того чтобы задать новый пароль, перейдите по  <a href=\"" + callbackUrl + "\">ссылке</a>" +
+                    "С уважением, команда <a href=\"" + settings.Link + "\">"+settings.Link+"</a>");
+                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

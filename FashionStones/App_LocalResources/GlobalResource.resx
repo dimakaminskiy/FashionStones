@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChangePasswordViewModelOldPassword" xml:space="preserve">
-    <value>DFEDG</value>
+    <value>Пароль</value>
   </data>
-   <data name="CategoryName" xml:space="preserve">
+  <data name="CategoryName" xml:space="preserve">
     <value>Название</value>
   </data>
   <data name="CoutryName" xml:space="preserve">
@@ -389,5 +389,20 @@
   </data>
   <data name="UserPhone" xml:space="preserve">
     <value>Моб. Телефон</value>
+  </data>
+  <data name="ChangePasswordViewModelConfirmPassword" xml:space="preserve">
+    <value>Подтверждение пароля</value>
+  </data>
+  <data name="ChangePasswordViewModelNewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="ErrorMessageCompareChangePasswordViewModelConfirmPassword" xml:space="preserve">
+    <value>Введеные пароли не совпадают</value>
+  </data>
+  <data name="ErrorMessageRequiredChangePasswordViewModelNewPassword" xml:space="preserve">
+    <value>Введите новый пароль</value>
+  </data>
+  <data name="ErrorMessageRequiredChangePasswordViewModelOldPassword" xml:space="preserve">
+    <value>Введите пароль</value>
   </data>
 </root>

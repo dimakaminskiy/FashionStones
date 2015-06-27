@@ -10,7 +10,7 @@ namespace FashionStones.Utils
 {
     public class EmailSettings
     {
-        public string Link = "elovetravel.ru";
+        public string Link = "www.fashion-stones.com.ua";
         public string MailFromAddress = "kapitoshka0777@gmail.com";
         public string ServerName = "smtp.gmail.com";
         public bool UseSsl = true;

@@ -16,7 +16,11 @@ namespace FashionStones.Models
 
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Ввидите телефон или e-mail")]
+        public LoginViewModel()
+        {
+            RememberMe = true;
+        }
+        [Required(ErrorMessage = "Введите телефон или e-mail")]
         [Display(Name = "Телефон или e-mail")]
         public string Email { get; set; }
 
@@ -25,7 +29,7 @@ namespace FashionStones.Models
         [Display(ResourceType = typeof(GlobalResource), Name = "UserPassword")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Запомнить меня?")]
         public bool RememberMe { get; set; }
     }
 

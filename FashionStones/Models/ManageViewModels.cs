@@ -43,21 +43,22 @@ namespace FashionStones.Models
 
     public class ChangePasswordViewModel
     {
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(GlobalResource), Name = "ChangePasswordViewModelOldPassword")]
         
+        [DataType(DataType.Password)]
+        [Required(ErrorMessageResourceName = "ErrorMessageRequiredChangePasswordViewModelOldPassword",
+           ErrorMessageResourceType = typeof(GlobalResource))]
+        [Display(ResourceType = typeof(GlobalResource), Name = "ChangePasswordViewModelOldPassword")]
         public string OldPassword { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceName = "ErrorMessageRequiredChangePasswordViewModelNewPassword",
+           ErrorMessageResourceType = typeof(GlobalResource))]
+        [StringLength(100, ErrorMessage = "{0} должен быть по крайней мере {2} символов", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(ResourceType = typeof(GlobalResource), Name = "ChangePasswordViewModelNewPassword")]
         public string NewPassword { get; set; }
-
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(ResourceType = typeof(GlobalResource), Name = "ChangePasswordViewModelConfirmPassword")]
+        [Compare("NewPassword",ErrorMessageResourceName = "ChangePasswordViewModelConfirmPassword",
+        ErrorMessageResourceType = typeof(GlobalResource))]
         public string ConfirmPassword { get; set; }
     }
 

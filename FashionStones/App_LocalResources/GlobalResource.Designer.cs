@@ -70,7 +70,25 @@ namespace FashionStones.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DFEDG.
+        ///   Looks up a localized string similar to Подтверждение пароля.
+        /// </summary>
+        public static string ChangePasswordViewModelConfirmPassword {
+            get {
+                return ResourceManager.GetString("ChangePasswordViewModelConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новый пароль.
+        /// </summary>
+        public static string ChangePasswordViewModelNewPassword {
+            get {
+                return ResourceManager.GetString("ChangePasswordViewModelNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пароль.
         /// </summary>
         public static string ChangePasswordViewModelOldPassword {
             get {
@@ -115,11 +133,38 @@ namespace FashionStones.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введеные пароли не совпадают.
+        /// </summary>
+        public static string ErrorMessageCompareChangePasswordViewModelConfirmPassword {
+            get {
+                return ResourceManager.GetString("ErrorMessageCompareChangePasswordViewModelConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Неверный формат E-mail.
         /// </summary>
         public static string ErrorMessageRegularExpressionEmail {
             get {
                 return ResourceManager.GetString("ErrorMessageRegularExpressionEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите новый пароль.
+        /// </summary>
+        public static string ErrorMessageRequiredChangePasswordViewModelNewPassword {
+            get {
+                return ResourceManager.GetString("ErrorMessageRequiredChangePasswordViewModelNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите пароль.
+        /// </summary>
+        public static string ErrorMessageRequiredChangePasswordViewModelOldPassword {
+            get {
+                return ResourceManager.GetString("ErrorMessageRequiredChangePasswordViewModelOldPassword", resourceCulture);
             }
         }
         

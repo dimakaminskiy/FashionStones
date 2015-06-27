@@ -190,6 +190,7 @@
     <Compile Include="Areas\Admin\Controllers\PHotoController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\StonesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Default\Controllers\AboutController.cs" />
     <Compile Include="Areas\Default\Controllers\CheckoutController.cs" />
     <Compile Include="Areas\Default\Controllers\ProductsController.cs" />
@@ -528,6 +529,7 @@
     <Content Include="Areas\Default\Views\Account\UserProfile.cshtml" />
     <Content Include="Areas\Default\Views\Manage\ChangePasswordSuccess.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerOrder\EditItemFromOrderDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fine-uploader\ajax.requester.js" />
     <Content Include="Scripts\fine-uploader\all.js" />
