@@ -19,7 +19,7 @@ $(document).ready(function () {
         var link = $(this).attr('href');
         $(function () {
             $('#exampleModalImg').empty();
-            $('#exampleModalImg').prepend('<div class="box-modal_close arcticmodal-close"></div><img src="' + link + '" />');
+            $('#exampleModalImg').prepend('<div class="box-modal_close arcticmodal-close"></div><img src="' + link + '" /><div class="arrow-left"><a href="#"></a></div><div class="arrow-right"><a href="#"></a></div>');
             $('#exampleModalImg').arcticmodal();
         });
     });
