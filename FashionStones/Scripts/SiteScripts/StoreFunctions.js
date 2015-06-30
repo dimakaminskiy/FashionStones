@@ -6,11 +6,19 @@ function showd(pid) {
 function hided(pid) {
     document.getElementById('prop-' + pid).style.display = 'none';
 }
-
 function CallChangefunc(val) {
     $("#limit").val(val);
     $("#sub-form-limit").submit();
 }
+function getNameById(id) {
+    return $("div[tr-id^='fName-" + id + "'] a.clickDetail").html();
+}
+function setName(name) {
+    $("#popup-details-name").html(name);
+}
+
+
+
 
 
 $(document).ready(function () {
@@ -18,14 +26,16 @@ $(document).ready(function () {
         event.preventDefault();
         var pId = $(this).attr("tr-id");
         var link = $(this).attr('href');
+        var name = getNameById(pId);       
         $(function () {
             $('#exampleModalImg').empty();
             $('#exampleModalImg').prepend('<div class="box-modal_close arcticmodal-close"></div>' +
                 '<img class="popup-gallery" src="' + link + '" />' +
                 '<div class="arrow-left"><a href="#"></a></div>' +
                 '<div class="arrow-right"><a href="#"></a></div>' +
-                '<div id="popup-details" style="display: none">'
-                + pId + '</div>');
+                '<div id="popup-details" style="display: none">'+ pId + '</div>'+
+                '<div id="popup-details-name" class="center">'+name+'</div>'
+                );
             $('#exampleModalImg').arcticmodal();
         });
     });
@@ -44,11 +54,14 @@ $(document).ready(function () {
             indexNext = l - 1;
         }
         tdNext = $('#goods td[td-class]')[indexNext];
-        var nextId = $(tdNext).attr('td-class');   
+       var nextId = $(tdNext).attr('td-class');   
        var image= $("#goods td[td-class^='" + nextId + "'] .clickImgGallery");
        var href = image.attr("href");
        $(".popup-gallery").attr("src", href);
        $("#popup-details").html(nextId);
+
+       var name = getNameById(nextId);
+       setName(name);
 
     });
     $('body').on('click', '#exampleModalImg .arrow-right', function (e) {
@@ -67,7 +80,8 @@ $(document).ready(function () {
         var href = image.attr("href");
         $(".popup-gallery").attr("src", href);
         $("#popup-details").html(nextId);
-
+        var name = getNameById(nextId);
+        setName(name);
     });
 
 

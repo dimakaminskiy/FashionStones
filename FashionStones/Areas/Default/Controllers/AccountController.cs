@@ -189,7 +189,7 @@ namespace FashionStones.Areas.Default.Controllers
 //                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                     await UserManager.SendEmailAsync(user.Id, "Регистрация", GetRegisterMessge(settings.Link, callbackUrl));
+                     await UserManager.SendEmailAsync(user.Id, "Регистрация " + settings.Link, GetRegisterMessge(settings.Link, callbackUrl));
                     return View("MustConfirmEmail", model);
                 }
                 AddErrors(result);

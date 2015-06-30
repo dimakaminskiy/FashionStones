@@ -71,6 +71,8 @@ namespace FashionStones.Models
         [Display(ResourceType = typeof(GlobalResource), Name = "UserPasswordRepeat")]
         [Compare("Password", ErrorMessage = "Введенные пароли не совпадают")]
         public string ConfirmPassword { get; set; }
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserKindOfActivity")]
+        public string KindOfActivity { get; set; }
     }
 
 

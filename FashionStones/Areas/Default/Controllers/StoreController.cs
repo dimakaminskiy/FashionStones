@@ -1,17 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
 using System.Web.Mvc;
 using FashionStones.Controllers;
 using FashionStones.Models;
 using FashionStones.Models.Domain.Entities;
 using FashionStones.Utils;
 using FashionStones.ViewModel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 
 namespace FashionStones.Areas.Default.Controllers
 {
     public class StoreController : BaseController
     {
+
+
+
         #region public
         private IQueryable<Product> GetProductsByCategoryId(int? id)
         {
@@ -44,8 +53,24 @@ namespace FashionStones.Areas.Default.Controllers
         public ActionResult Index(int? catId, string catName, int? stoneId, string stone,  
             string sort,string search,int page=1, int limit=15 )
         {
+
+            if (Request.HttpMethod.ToString() == "POST")
+            {
+                return RedirectToAction("Index", new
+                {
+                    catId = catId,
+                    catName = catName,
+                    stoneId = stoneId,
+                    stone = stone,
+                    sort = sort,
+                    search = search,
+                    page = page,
+                    limit = limit
+                });
+            }
+
+
             IQueryable<Product> query;
-            
             if (catId.HasValue == false)
             {
                 catId = 0;
@@ -56,13 +81,14 @@ namespace FashionStones.Areas.Default.Controllers
             {
                 var cat = DataManager.Categories.SearchFor(x => x.Id == catId).Single();
                 catName = cat.TranslitName();
-                ViewBag.Title = cat.Name;
+                ViewBag.Title = "Fashion Stones - "+cat.Name;
             }
             query = GetProductsByCategoryId(catId); // товар выбраной категории
            
             if (stoneId.HasValue)
             {
                 query = GetProductByStone(query, stoneId);
+                ViewBag.Title = "Fashion Stones - " + DataManager.Stones.SearchFor(x => x.Id == stoneId).Single().Name;
             }
             IEnumerable<Product> list = query.ToList(); 
             list= SortProductByOptions(list, sort);
@@ -108,11 +134,49 @@ namespace FashionStones.Areas.Default.Controllers
             return list;
         }
       
-        public ActionResult Search(string text, string sort = "novelty", int page = 1, int limit = 15)
+        public ActionResult Search(string text, string sort, int? page, int? limit)
         {
+
+            if (string.IsNullOrEmpty(text)) return RedirectToAction("Index");
+
+
+
+            if (Request.HttpMethod.ToString() == "POST")
+            {
+                return RedirectToAction("Search", new
+                {
+                    text = text,
+                    sort = sort,
+                    page = page,
+                    limit = limit,
+                });
+            }
+
+
+
+
+
+
+
+
+            if (!page.HasValue) page = 1;
+            if (!limit.HasValue) limit = 15;
+            if (string.IsNullOrEmpty(sort)) sort = "novelty";
+           
+
+
+
+
+
+
+
+
+
+
             var query = DataManager.Products.GetAll().ToList();
             var list=  GetProductBySearch(query, text);
-            var model = new ProductViewModel(list.AsQueryable(), page, limit, sort, text);
+            list = SortProductByOptions(list, sort);
+            var model = new ProductViewModel(list.AsQueryable(), page.Value, limit.Value, sort, text);
             return View(model);
         }
 
@@ -147,6 +211,32 @@ namespace FashionStones.Areas.Default.Controllers
         {
             if (ModelState.IsValid)
             {
+                EmailSettings settings = new EmailSettings();
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = settings.ServerName;
+                smtp.Port = settings.ServerPort;
+                smtp.EnableSsl = settings.UseSsl;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential(settings.MailFromAddress, settings.password);
+
+                using (var msg = new MailMessage(settings.MailFromAddress, settings.MailFromAddress))
+                {
+                        string message= string.Format("Номер заказа {0}<br>Номер телефона {1}<br>Сумма оплаты {2}<br>Время платежа {3}",
+                        model.OrderId, model.PhoneNumber, model.Total,model.TimePay);
+                        msg.Subject = "Сообщение об оплате";//message;
+                        msg.IsBodyHtml = true;
+                        msg.Body = message;
+                    try
+                    {
+                         smtp.Send(msg);
+                    }
+                    catch (Exception)
+                    {
+                        return RedirectToAction("NotFound", "Error");
+                    }
+                       
+                }
                 return View("InformPaymentConfirm", "", model);
             }
             return View();

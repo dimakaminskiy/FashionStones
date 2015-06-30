@@ -1,4 +1,39 @@
-﻿$(document).ready(function () {
+﻿       function blockPage() {
+           $.reject({
+               reject: {
+                   msie: true
+               },
+               display: ['firefox', 'chrome', 'opera', 'safari', 'msie'],
+               close: false,
+               imagePath: "/Content/jReject/images/",
+               // Background color for overlay  
+               overlayBgColor: '#000',
+               // Background transparency (0-1)  
+               overlayOpacity: 1.0,
+
+               // Fade in time on open ('slow','medium','fast' or integer in ms)  
+               fadeInTime: 'fast',
+               // Fade out time on close ('slow','medium','fast' or integer in ms)  
+               fadeOutTime: 'fast',
+               header: 'Ваш браузер устарел!',
+               paragraph1: 'Вы пользуетесь устаревшим браузером, который не поддерживает современные веб-стандарты и представляет угрозу вашей безопасности.',
+               paragraph2: 'Пожалуйста, установите современный браузер. Щёлкните по любой иконке, чтобы перейти на страницу загрузки браузера, загрузеите и установите его, после чего зайдите на сайт через него.'
+           });
+       }
+
+
+
+
+$(document).ready(function () {
+           var oldIE = false;
+           if ($('html').is('.ie6, .ie7, .ie8, .ie9')) {
+               oldIE = true;
+           }
+           if (oldIE) {
+               $('html').css("overflow", "hidden");
+               blockPage();
+               return false;
+           }
 
     //Регистрация смена
     $('.block_register').click(function () {

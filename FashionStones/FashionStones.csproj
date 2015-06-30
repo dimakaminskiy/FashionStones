@@ -193,9 +193,9 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Default\Controllers\AboutController.cs" />
     <Compile Include="Areas\Default\Controllers\CheckoutController.cs" />
+    <Compile Include="Areas\Default\Controllers\ErrorController.cs" />
     <Compile Include="Areas\Default\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Default\Controllers\ShoppingCartController.cs" />
-    <Compile Include="Areas\Default\Controllers\StoneController.cs" />
     <Compile Include="Areas\Default\Controllers\StoreController.cs" />
     <Compile Include="Areas\Default\DefaultAreaRegistration.cs" />
     <Compile Include="Areas\Default\Controllers\AccountController.cs" />
@@ -427,6 +427,16 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery.jgrowl.css" />
+    <Content Include="Content\jReject\css\jquery.reject.css" />
+    <Content Include="Content\jReject\doc.html" />
+    <Content Include="Content\jReject\images\background_browser.gif" />
+    <Content Include="Content\jReject\images\browser_chrome.gif" />
+    <Content Include="Content\jReject\images\browser_firefox.gif" />
+    <Content Include="Content\jReject\images\browser_konqueror.gif" />
+    <Content Include="Content\jReject\images\browser_msie.gif" />
+    <Content Include="Content\jReject\images\browser_opera.gif" />
+    <Content Include="Content\jReject\images\browser_safari.gif" />
+    <Content Include="Content\jReject\js\jquery.reject.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\StyleAdmin.css" />
     <Content Include="favicon.ico" />
@@ -498,6 +508,7 @@
     <Content Include="Areas\Admin\Views\Stones\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Stones\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Default\Views\About\Contacts.cshtml" />
@@ -529,6 +540,9 @@
     <Content Include="Areas\Default\Views\Manage\ChangePasswordSuccess.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerOrder\EditItemFromOrderDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Content\jReject\bower.json" />
+    <Content Include="Content\jReject\CHANGELOG" />
+    <Content Include="Content\jReject\jReject.jquery.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fine-uploader\ajax.requester.js" />
     <Content Include="Scripts\fine-uploader\all.js" />
@@ -603,11 +617,14 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Default\Models\" />
+    <Folder Include="Areas\Default\Views\Error\" />
     <Folder Include="Content\images\Temp\" />
   </ItemGroup>
   <ItemGroup>

@@ -60,31 +60,36 @@ namespace FashionStones.Areas.Admin.Controllers
 
 
 
-        //       [HttpPost]
-        //       public ActionResult DeleteOrder(int id)
-        //       {
-        //           try
-        //           {
-        //               var listDetails = dataManager.OrderDetails.GetOrderDetails().Where(i => i.OrderId == id);
-        //               if (listDetails.Any())
-        //               {
-        //                   foreach (OrderDetail orderDetail in listDetails)
-        //                   {
-        //                       dataManager.OrderDetails.DeleteOrderDetailById(orderDetail.Id);
-        //                   }
-        //               }
-        //               dataManager.Orders.DeleteOrderById(id);
-        //           }
-        //           catch (Exception)
-        //           {
-        //               return Json(new
-        //               {
-        //                   success = false,
-        //                   errorMessage = "Произошла ошибка при удалении заказа"
-        //               });
-        //           }
-        //           return Json(new { success = true });
-        //       }
+        [HttpPost]
+        public ActionResult DeleteOrder(int id)
+        {
+            try
+            {
+                var listDetails = db.OrderDetails.Where(i => i.OrderId == id).ToList();
+                if (listDetails.Any())
+                {
+                    foreach (OrderDetail orderDetail in listDetails)
+                    {
+                        db.OrderDetails.Remove(orderDetail);
+                    }
+                   
+                }
+
+                var order = db.Orders.Single(x => x.Id == id);
+                db.Orders.Remove(order);
+                db.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    success = false,
+                    errorMessage = "Произошла ошибка при удалении заказа"
+                });
+            }
+            return Json(new { success = true });
+        }
 
 
 

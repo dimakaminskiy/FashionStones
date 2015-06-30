@@ -14,6 +14,30 @@ namespace FashionStones.Areas.Default
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
+
+              context.MapRoute(
+              name: "",
+              url: "Store/Search/text-{text}/page-{page}/limit-{limit}/sort-{sort}",
+              defaults: new { Controller = "Store", action = "Search" },
+               constraints: new { page = @"\d+", limit = @"\d+" },
+              namespaces: new string[] { "FashionStones.Areas.Default.Controllers" }
+          );
+
+
+             context.MapRoute(
+              name: "",
+              url: "Store/Search/text-{text}",
+              defaults: new { Controller = "Store", action = "Search" },
+              namespaces: new string[] { "FashionStones.Areas.Default.Controllers" }
+          );
+           
+
+
+
+            
+
+
+
             context.MapRoute(
                  name: "",
                  url: "Store/cat-{catId}/category-{catName}/page-{page}/limit-{limit}/sort-{sort}",
@@ -27,13 +51,8 @@ namespace FashionStones.Areas.Default
                   defaults: new { Controller = "Store", action = "Index" },
                   constraints: new { catId = @"\d+" },
                   namespaces: new string[] { "FashionStones.Areas.Default.Controllers" }
-              );
-            context.MapRoute(
-                  name: "",
-                  url: "Store/Search/text-{text}/page-{page}/limit-{limit}/sort-{sort}",
-                  defaults: new { Controller = "Store", action = "Search" },
-                  namespaces: new string[] { "FashionStones.Areas.Default.Controllers" }
-              );
+              );           
+
             context.MapRoute(
                   name: "",
                   url: "Store/cat-{catId}/category-{catName}/",

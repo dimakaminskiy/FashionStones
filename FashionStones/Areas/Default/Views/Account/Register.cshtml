@@ -1,6 +1,7 @@
-﻿@model  FashionStones.Models.RegisterViewModel
+﻿@using System.Web.UI.WebControls
+@model  FashionStones.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Регистрация";
+    ViewBag.Title = "Fashion Stones - Регистрация";
     Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
 }
 <td>
@@ -21,16 +22,8 @@
                 <p>
                     Все цены указаны с <span class="red">УЧЕТОМ ПРОЦЕНТА!</span>
                 </p>
-                @*<p>
-                        При регистрации Вам будет предложено заполнить необязательное поле для ввода ИНН (Идентификационного номера налогоплательщика).
-                    </p>
-
-                    <p>
-                        Но еще раз повторяем ИНН можно не заполнять. Либо это можно сделать позже.
-                    </p>*@
                 <ol>
                     Есть несколько условий сотрудничества:
-
                     <li>Не раздавать Ваш Логин и пароль третим лицам (система автоматически блокирует подобное).</li>
                     <li>Минимальный ПЕРВЫЙ заказ 1000 грн. по оптовым ценам, последующие 200 грн.</li>
                     <li>Учетная запись активируется на 15 дней до первого заказа, после которого все ограничения будут сняты.</li>
@@ -90,7 +83,7 @@
                             @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
                             <span style="color: red"> * </span>
                         </td>
-                        <td>@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeHolder="+380955437583" } })</td>
                         <td>@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })</td>
                     </tr>
                     <tr>
@@ -111,11 +104,18 @@
                     </tr>
                     <tr>
                         <td>
-                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new {@class = "control-label col-md-2"})
                             <span style="color: red"> * </span>
                         </td>
-                        <td>@Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })</td>
-                        <td>@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })</td>
+                        <td>@Html.EditorFor(model => model.ConfirmPassword, new {htmlAttributes = new {@class = "form-control"}})</td>
+                        <td>@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new {@class = "text-danger"})</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.KindOfActivity, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <span style="color: red"> * </span>
+                        </td>
+                        <td colspan="2">@Html.TextAreaFor(model => model.KindOfActivity, new { @class = "form-control",@placeholder = "Вид деятяльности, место работы."} )</td>
                     </tr>
                 </table>
 

@@ -32,6 +32,8 @@ namespace FashionStones.Models
         public int CountryId { get; set; }
         [Display(ResourceType = typeof(GlobalResource), Name = "UserCity")]
         public string City { get; set; }
+        [Display(ResourceType = typeof(GlobalResource), Name = "UserKindOfActivity")]
+        public string KindOfActivity { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

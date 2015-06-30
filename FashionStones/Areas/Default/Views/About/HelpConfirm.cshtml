@@ -1,25 +1,14 @@
 ﻿@model  FashionStones.ViewModel.HelpViewModel
 
 @{
-    ViewBag.Title = "Помошь";
+    ViewBag.Title = "Fashion Stones - Помошь";
     Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
 }
 
-<div id="Gif">
-    <table id="LogInMy">
-        <caption>
-            <h4>Уважаемый(-ая) @Model.FullName</h4>
-        </caption>
-        <tr>
-            <td>Мы обязательно свяжемся с Вами по адресу @Model.Email</td>
-        </tr>
-        <tr>
-            <td>
-                <span>112314</span>  
-             </td>
-        </tr>
-    </table>
-    }
-</div>
-
+<td>
+    <div class="dostavka">
+                <h2>Уважаемый(-ая) @Model.FullName</h2>
+        <p class="center">Мы обязательно свяжемся с Вами по адресу @Model.Email</p>
+    </div>
+</td>
 

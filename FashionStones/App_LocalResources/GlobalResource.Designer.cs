@@ -871,6 +871,15 @@ namespace FashionStones.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вид деятельности.
+        /// </summary>
+        public static string UserKindOfActivity {
+            get {
+                return ResourceManager.GetString("UserKindOfActivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Фамилия.
         /// </summary>
         public static string UserLastName {

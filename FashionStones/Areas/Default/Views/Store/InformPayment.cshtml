@@ -1,19 +1,16 @@
 ﻿@model FashionStones.ViewModel.InformPaymentViewModel
 
 @{
-    ViewBag.Title = "Информация об оплате";
+    ViewBag.Title = "Fashion Stones - Информация об оплате";
     Layout = "~/Areas/Default/Views/Shared/DefaultLayout.cshtml";
 }
 
 <td>
     <div class="dostavka">
         <h2>Информация об оплате</h2>
-
-
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-
             <div class="form-horizontal">
                 <div class="block" style="position: absolute; bottom: -15px; right: 5px;">
                     @Html.ValidationSummary(true, "", new {@class = "text-danger"})
@@ -26,7 +23,6 @@
                             @Html.ValidationMessageFor(model => model.OrderId, "", new {@class = "text-danger"})</p>
                         </div>
                     </div>
-
                     <div class="form-group center">
                         @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new {@class = "control-label col-md-2"})
                         <div class="col-md-10">
@@ -35,7 +31,6 @@
                             @Html.ValidationMessageFor(model => model.PhoneNumber, "", new {@class = "text-danger"})</p>
                         </div>
                     </div>
-
                     <div class="form-group center">
                         @Html.LabelFor(model => model.Total, htmlAttributes: new {@class = "control-label col-md-2"})
                         <div class="col-md-10">
@@ -44,7 +39,6 @@
                             @Html.ValidationMessageFor(model => model.Total, "", new {@class = "text-danger"})</p>
                         </div>
                     </div>
-
                     <div class="form-group center">
                         @Html.LabelFor(model => model.TimePay, htmlAttributes: new {@class = "control-label col-md-2"})
                         <div class="col-md-10">
@@ -53,7 +47,6 @@
                             @Html.ValidationMessageFor(model => model.TimePay, "", new {@class = "text-danger"})</p>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10 padding10">
                             <input type="submit" value="Отправить" class="button_submit btn btn-default" />

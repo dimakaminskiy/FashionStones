@@ -405,4 +405,7 @@
   <data name="ErrorMessageRequiredChangePasswordViewModelOldPassword" xml:space="preserve">
     <value>Введите пароль</value>
   </data>
+  <data name="UserKindOfActivity" xml:space="preserve">
+    <value>Вид деятельности</value>
+  </data>
 </root>

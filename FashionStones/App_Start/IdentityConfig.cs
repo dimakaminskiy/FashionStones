@@ -34,6 +34,7 @@ namespace FashionStones
             using (var msg = new MailMessage(settings.MailFromAddress, message.Destination))
             {
                 msg.Subject = message.Subject;
+                
                 //  message.Body = Body;
                 // message.IsBodyHtml = IsHtml;
                 // msg.Body = message.Body;
